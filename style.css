@@ -34,3 +34,10 @@ a:hover {
 a:active {
   color: #1E90FF;
 }
+code {
+  font-family: Consolas,"courier new";
+  color: #FF1493;
+  background-color: black;
+  padding: 2px;
+  font-size: 105%;
+}
