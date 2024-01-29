@@ -1,17 +1,24 @@
 body {
   background-color: #161b22;
-  color: white;
+  color: #ccc;
+  font-family: verdana;
+  
 }
 
 h1 {
-  color: white;
+  color: #ccc;
   text-align: center;
+  
 }
-
+h2 {
+	text-align: center;
+	
+   
+  font-size: 15px;
+}
 p {
-  color: white;	
-  font-family: verdana;
-  font-size: 20px;
+  color: #ccc;	
+
 }
 
 /* unvisited link */
@@ -38,6 +45,6 @@ code {
   font-family: Consolas,"courier new";
   color: #FFFFF0;
   background-color: black;
-  padding: 2px;
-  font-size: 105%;
+  padding: 6px;
+  font-size: 80%;
 }
