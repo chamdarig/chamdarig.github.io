@@ -1,3 +1,10 @@
+body {
+  background-color: #161b22;
+  color: #ccc;
+  font-family: verdana;
+  
+}
+
 .container {
     text-align: center;
     margin-top: 50px;
