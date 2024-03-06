@@ -15,7 +15,8 @@ document.addEventListener("DOMContentLoaded", function() {
     function addToHistory(feeling) {
         feelingHistory.push(feeling);
         renderHistory();
-    }
+    } 
+    /*
 function renderHistory() {
     historyList.innerHTML = "";
     feelingHistory.forEach(feeling => {
@@ -24,14 +25,15 @@ function renderHistory() {
         historyList.appendChild(listItem);
     });
 }
- //   function renderHistory() {
-//        historyList.innerHTML = "";
-//        feelingHistory.forEach(feeling => {
-//            const listItem = document.createElement("li");
-//            listItem.textContent = `${feeling.date} - ${feeling.text}`;
-//            historyList.appendChild(listItem);
-//        });
-//    }
+*/
+    function renderHistory() {
+        historyList.innerHTML = "";
+        feelingHistory.forEach(feeling => {
+            const listItem = document.createElement("li");
+            listItem.textContent = `${feeling.date} - ${feeling.text}`;
+            historyList.appendChild(listItem);
+        });
+    }
 
     happyButton.addEventListener("click", function() {
         const feeling = { text: "Happy", emoji: "😊", date: new Date().toLocaleString() };
