@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
         feelingHistory.push(feeling);
         renderHistory();
     } 
-    /*
+ 
 function renderHistory() {
     historyList.innerHTML = "";
     feelingHistory.forEach(feeling => {
@@ -25,7 +25,7 @@ function renderHistory() {
         historyList.appendChild(listItem);
     });
 }
-*/
+   /*
     function renderHistory() {
         historyList.innerHTML = "";
         feelingHistory.forEach(feeling => {
@@ -34,7 +34,7 @@ function renderHistory() {
             historyList.appendChild(listItem);
         });
     }
-
+*/
     happyButton.addEventListener("click", function() {
         const feeling = { text: "Happy", emoji: "😊", date: new Date().toLocaleString() };
         updateFace(feeling);
