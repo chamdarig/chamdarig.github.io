@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Coded Code Blocks</title>
+    <style>
+        pre {
+            background-color: #272822; /* Dark background color */
+            color: #f8f8f2; /* Text color */
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        /* Color coding for specific languages */
+        pre code.html { color: #e34c26; }
+        pre code.css { color: #56b6c2; }
+        pre code.javascript { color: #f8f8f2; }
+        pre code.comment { color: #75715e; } /* Comments color */
+        pre code.keyword { color: #f92672; } /* Keywords color */
+        pre code.string { color: #e6db74; } /* Strings color */
+        pre code.number { color: #ae81ff; } /* Numbers color */
+    </style>
+</head>
+<body>
+    <h2>Color Coded Code Blocks</h2>
+    <h3>HTML</h3>
+    <pre><code class="html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Color Coded Code Blocks&lt;/title&gt;
+    &lt;link rel="stylesheet" href="styles.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hello, world!&lt;/h1&gt;
+    &lt;script src="script.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+    </code></pre>
+    <h3>CSS</h3>
+    <pre><code class="css">
+body {
+    background-color: #272822;
+    color: #f8f8f2;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    color: #f92672;
+}
+
+p {
+    color: #a6e22e;
+}
+    </code></pre>
+    <h3>JavaScript</h3>
+    <pre><code class="javascript">
+// JavaScript code
+function greet(name) {
+    return `Hello, ${name}!`;
+}
+
+console.log(greet('world'));
+    </code></pre>
+</body>
+</html>
