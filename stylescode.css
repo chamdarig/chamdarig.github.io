@@ -1,0 +1,12 @@
+pre code.styled-code .number {
+    color: #ff0000; /* Red color */
+}
+
+pre code.styled-code .property-name {
+    color: #00ff00; /* Green color */
+}
+
+/* Example code */
+pre code.styled-code {
+    font-family: monospace;
+}
