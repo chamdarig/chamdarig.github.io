@@ -37,7 +37,7 @@ a:hover {
   color: #FF1493;
 }
 
-/* selected link */
+apps/snacktrack/addsnack.html
 a:active {
   color: #1E90FF;
 }
@@ -48,3 +48,4 @@ code {
   padding: 6px;
   font-size: 80%;
 }
+/* styles for mobile screens below */
