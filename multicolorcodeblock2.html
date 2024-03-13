@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-color Code Block</title>
+    <style>
+        pre {
+            background-color: #272822; /* Dark background color */
+            color: #f8f8f2; /* Text color */
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        /* Color coding for specific languages */
+        pre code.html { color: #e34c26; } /* HTML tags and attributes */
+        pre code.css { color: #56b6c2; } /* CSS selectors and properties */
+        pre code.javascript { color: #f8f8f2; } /* JavaScript code */
+        pre code.comment { color: #75715e; } /* Comments color */
+        pre code.keyword { color: #f92672; } /* Keywords color */
+        pre code.string { color: #e6db74; } /* Strings color */
+        pre code.number { color: #ae81ff; } /* Numbers color */
+    </style>
+</head>
+<body>
+    <h2>Multi-color Code Block</h2>
+    <pre><code class="javascript">
+// JavaScript code with multi-color formatting
+function calculateCircleArea(radius) {
+    // Comment
+    const pi = 3.14159;
+    let area = pi * radius ** 2; // Comment
+    return area;
+}
+
+console.log(calculateCircleArea(5)); // Output: 78.53975
+    </code></pre>
+</body>
+</html>
