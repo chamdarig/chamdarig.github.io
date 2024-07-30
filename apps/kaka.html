@@ -6,145 +6,171 @@
     <title>Inside Outside App</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f7f6;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-            margin-top: 20px;
-        }
-        h2 {
-            color: #2c3e50;
-        }
-        .container {
-            max-width: 90%;
-            margin: 20px auto;
-            padding: 20px;
-            border-radius: 8px;
-            background: #ffffff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .section {
-            margin-bottom: 30px;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #34495e;
-            font-size: 16px;
-        }
-        select, button, input[type="datetime-local"], input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            margin-bottom: 15px;
-            box-sizing: border-box;
-        }
-        select:focus, input[type="datetime-local"]:focus, input[type="text"]:focus {
-            border-color: #3498db;
-            outline: none;
-        }
-        button {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            padding: 12px;
-            font-size: 16px;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
-        button:hover {
-            background-color: #2980b9;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 14px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: center;
-        }
-        th {
-            background-color: #3498db;
-            color: white;
-        }
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        .image-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        .image-buttons button {
-            border: none;
-            background: none;
-            cursor: pointer;
-            padding: 0;
-        }
-        .image-buttons img {
-            width: 60px;
-            height: 60px;
-            transition: transform 0.3s ease;
-        }
-        .image-buttons img:hover {
-            transform: scale(1.1);
-        }
-        .stats {
-            padding: 15px;
-            background: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .stats h2 {
-            margin-bottom: 15px;
-        }
-        .stats ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        .stats li {
-            padding: 10px 0;
-            border-bottom: 1px solid #ddd;
-        }
-        .stats li:last-child {
-            border-bottom: none;
-        }
+    font-family: 'Arial', sans-serif;
+    background-color: #121212; /* Dark background */
+    color: #e0e0e0; /* Light text color */
+    margin: 0;
+    padding: 0;
+}
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-            }
-            button, select, input[type="datetime-local"], input[type="text"] {
-                font-size: 14px;
-                padding: 8px;
-            }
-            .image-buttons img {
-                width: 50px;
-                height: 50px;
-            }
-        }
+h1 {
+    text-align: center;
+    color: #ffffff; /* White text color */
+    margin-top: 20px;
+}
 
-        @media (max-width: 480px) {
-            button, select, input[type="datetime-local"], input[type="text"] {
-                font-size: 12px;
-                padding: 6px;
-            }
-        }
+h2 {
+    color: #e0e0e0; /* Light text color */
+}
+
+.container {
+    max-width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    background: #1f1f1f; /* Dark container background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.section {
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #b0b0b0; /* Slightly lighter text color */
+    font-size: 16px;
+}
+
+select, button, input[type="datetime-local"], input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #333; /* Darker border */
+    border-radius: 4px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    background-color: #333; /* Dark background for inputs and selects */
+    color: #e0e0e0; /* Light text color for inputs and selects */
+}
+
+select:focus, input[type="datetime-local"]:focus, input[type="text"]:focus {
+    border-color: #1e90ff; /* Bright blue border color on focus */
+    outline: none;
+}
+
+button {
+    background-color: #1e90ff; /* Bright blue button */
+    color: #ffffff; /* White text color */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #187bcd; /* Darker blue on hover */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+th, td {
+    border: 1px solid #444; /* Darker border */
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background-color: #1e90ff; /* Bright blue header background */
+    color: #ffffff; /* White text color */
+}
+
+tr:nth-child(even) {
+    background-color: #2c2c2c; /* Slightly lighter dark background for even rows */
+}
+
+.image-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.image-buttons button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.image-buttons img {
+    width: 60px;
+    height: 60px;
+    transition: transform 0.3s ease;
+}
+
+.image-buttons img:hover {
+    transform: scale(1.1);
+}
+
+.stats {
+    padding: 15px;
+    background: #1f1f1f; /* Dark background for stats section */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.stats h2 {
+    margin-bottom: 15px;
+    color: #e0e0e0; /* Light text color */
+}
+
+.stats ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.stats li {
+    padding: 10px 0;
+    border-bottom: 1px solid #333; /* Darker border for list items */
+}
+
+.stats li:last-child {
+    border-bottom: none;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    button, select, input[type="datetime-local"], input[type="text"] {
+        font-size: 14px;
+        padding: 8px;
+    }
+    .image-buttons img {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    button, select, input[type="datetime-local"], input[type="text"] {
+        font-size: 12px;
+        padding: 6px;
+    }
+}
     </style>
 </head>
 <body>
