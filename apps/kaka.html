@@ -5,172 +5,156 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inside Outside App</title>
     <style>
+        /* Add your CSS styles here for dark theme */
         body {
-    font-family: 'Arial', sans-serif;
-    background-color: #121212; /* Dark background */
-    color: #e0e0e0; /* Light text color */
-    margin: 0;
-    padding: 0;
-}
+            font-family: 'Arial', sans-serif;
+            background-color: #121212; /* Dark background */
+            color: #e0e0e0; /* Light text color */
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            color: #ffffff; /* White text color */
+            margin-top: 20px;
+        }
+        h2 {
+            color: #e0e0e0; /* Light text color */
+        }
+        .container {
+            max-width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 8px;
+            background: #1f1f1f; /* Dark container background */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #b0b0b0; /* Slightly lighter text color */
+            font-size: 16px;
+        }
+        select, button, input[type="datetime-local"], input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #333; /* Darker border */
+            border-radius: 4px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            background-color: #333; /* Dark background for inputs and selects */
+            color: #e0e0e0; /* Light text color for inputs and selects */
+        }
+        select:focus, input[type="datetime-local"]:focus, input[type="text"]:focus {
+            border-color: #1e90ff; /* Bright blue border color on focus */
+            outline: none;
+        }
+        button {
+            background-color: #1e90ff; /* Bright blue button */
+            color: #ffffff; /* White text color */
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #187bcd; /* Darker blue on hover */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        th, td {
+            border: 1px solid #444; /* Darker border */
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #1e90ff; /* Bright blue header background */
+            color: #ffffff; /* White text color */
+        }
+        tr:nth-child(even) {
+            background-color: #2c2c2c; /* Slightly lighter dark background for even rows */
+        }
+        .image-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .image-buttons button {
+            border: none;
+            background: none;
+            cursor: pointer;
+            padding: 0;
+        }
+        .image-buttons img {
+            width: 60px;
+            height: 60px;
+            transition: transform 0.3s ease;
+        }
+        .image-buttons img:hover {
+            transform: scale(1.1);
+        }
+        .stats {
+            padding: 15px;
+            background: #1f1f1f; /* Dark background for stats section */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        .stats h2 {
+            margin-bottom: 15px;
+            color: #e0e0e0; /* Light text color */
+        }
+        .stats table {
+            margin-top: 15px;
+        }
+        .stats button {
+            margin: 5px;
+            background-color: #3498db; /* Button color */
+            color: #ffffff; /* Text color */
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+        .stats button:hover {
+            background-color: #2980b9; /* Darker blue on hover */
+        }
 
-h1 {
-    text-align: center;
-    color: #ffffff; /* White text color */
-    margin-top: 20px;
-}
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            button, select, input[type="datetime-local"], input[type="text"] {
+                font-size: 14px;
+                padding: 8px;
+            }
+            .image-buttons img {
+                width: 50px;
+                height: 50px;
+            }
+        }
 
-h2 {
-    color: #e0e0e0; /* Light text color */
-}
-
-.container {
-    max-width: 90%;
-    margin: 20px auto;
-    padding: 20px;
-    border-radius: 8px;
-    background: #1f1f1f; /* Dark container background */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-.section {
-    margin-bottom: 30px;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-    color: #b0b0b0; /* Slightly lighter text color */
-    font-size: 16px;
-}
-
-select, button, input[type="datetime-local"], input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #333; /* Darker border */
-    border-radius: 4px;
-    margin-bottom: 15px;
-    box-sizing: border-box;
-    background-color: #333; /* Dark background for inputs and selects */
-    color: #e0e0e0; /* Light text color for inputs and selects */
-}
-
-select:focus, input[type="datetime-local"]:focus, input[type="text"]:focus {
-    border-color: #1e90ff; /* Bright blue border color on focus */
-    outline: none;
-}
-
-button {
-    background-color: #1e90ff; /* Bright blue button */
-    color: #ffffff; /* White text color */
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    padding: 12px;
-    font-size: 16px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #187bcd; /* Darker blue on hover */
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
-}
-
-th, td {
-    border: 1px solid #444; /* Darker border */
-    padding: 12px;
-    text-align: center;
-}
-
-th {
-    background-color: #1e90ff; /* Bright blue header background */
-    color: #ffffff; /* White text color */
-}
-
-tr:nth-child(even) {
-    background-color: #2c2c2c; /* Slightly lighter dark background for even rows */
-}
-
-.image-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.image-buttons button {
-    border: none;
-    background: none;
-    cursor: pointer;
-    padding: 0;
-}
-
-.image-buttons img {
-    width: 60px;
-    height: 60px;
-    transition: transform 0.3s ease;
-}
-
-.image-buttons img:hover {
-    transform: scale(1.1);
-}
-
-.stats {
-    padding: 15px;
-    background: #1f1f1f; /* Dark background for stats section */
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-.stats h2 {
-    margin-bottom: 15px;
-    color: #e0e0e0; /* Light text color */
-}
-
-.stats ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.stats li {
-    padding: 10px 0;
-    border-bottom: 1px solid #333; /* Darker border for list items */
-}
-
-.stats li:last-child {
-    border-bottom: none;
-}
-
-@media (max-width: 768px) {
-    .container {
-        padding: 15px;
-    }
-    button, select, input[type="datetime-local"], input[type="text"] {
-        font-size: 14px;
-        padding: 8px;
-    }
-    .image-buttons img {
-        width: 50px;
-        height: 50px;
-    }
-}
-
-@media (max-width: 480px) {
-    button, select, input[type="datetime-local"], input[type="text"] {
-        font-size: 12px;
-        padding: 6px;
-    }
-}
+        @media (max-width: 480px) {
+            button, select, input[type="datetime-local"], input[type="text"] {
+                font-size: 12px;
+                padding: 6px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -257,40 +241,57 @@ tr:nth-child(even) {
         <!-- Stats Section -->
         <div class="section stats">
             <h2>Stats</h2>
-            <ul id="stats-list">
-                <!-- Stats will be populated here -->
-            </ul>
+            <button id="sort-fruits">Sort by Total Fruits</button>
+            <button id="sort-vegetables">Sort by Total Vegetables</button>
+            <button id="sort-dairy">Sort by Total Dairy</button>
+            <button id="sort-circle">Sort by Total Circle</button>
+            <button id="sort-triangle">Sort by Total Triangle</button>
+            <button id="sort-square">Sort by Total Square</button>
+            <table id="stats-table">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Item</th>
+                        <th>Total Added</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Stats data will be added here -->
+                </tbody>
+            </table>
         </div>
     </div>
 
     <script>
+        // JavaScript code as before...
+
+        const foodItems = {
+            Fruits: [],
+            Vegetables: [],
+            Dairy: []
+        };
+
+        const foodTableBody = document.querySelector('#food-table tbody');
+        const statsTableBody = document.querySelector('#stats-table tbody');
+        const itemCategorySelect = document.getElementById('item-category');
+        const itemSelect = document.getElementById('item-select');
+        const datetimeInput = document.getElementById('datetime');
+        const addItemButton = document.getElementById('add-item-button');
         const newItemCategorySelect = document.getElementById('new-item-category');
         const newItemNameInput = document.getElementById('new-item-name');
         const addNewItemButton = document.getElementById('add-new-item-button');
-
-        const itemCategorySelect = document.getElementById('item-category');
-        const itemSelect = document.getElementById('item-select');
-        const addItemButton = document.getElementById('add-item-button');
-        const datetimeInput = document.getElementById('datetime');
-        const foodTableBody = document.getElementById('food-table').getElementsByTagName('tbody')[0];
-        const statsList = document.getElementById('stats-list');
-
-        const foodItems = {
-            'Fruits': ['Apple', 'Banana', 'Orange'],
-            'Vegetables': ['Carrot', 'Broccoli', 'Spinach'],
-            'Dairy': ['Milk', 'Cheese', 'Yogurt']
-        };
+        const statsList = document.createElement('ul');
 
         const stats = {
             categories: {
-                'Fruits': 0,
-                'Vegetables': 0,
-                'Dairy': 0
+                Fruits: 0,
+                Vegetables: 0,
+                Dairy: 0
             },
             buttonClicks: {
-                'Circle': 0,
-                'Triangle': 0,
-                'Square': 0
+                Circle: 0,
+                Triangle: 0,
+                Square: 0
             },
             totalItems: 0
         };
@@ -398,27 +399,78 @@ tr:nth-child(even) {
         });
 
         function updateStats() {
-            statsList.innerHTML = '';
+            statsTableBody.innerHTML = '';
             const totalItems = stats.totalItems;
 
-            for (const category in stats.categories) {
-                const count = stats.categories[category];
-                const li = document.createElement('li');
-                li.textContent = `${category}: ${count} items added`;
-                statsList.appendChild(li);
-            }
+            // Update stats table with sorted data
+            const sortedCategories = Object.entries(stats.categories).sort((a, b) => b[1] - a[1]);
+            const sortedButtonClicks = Object.entries(stats.buttonClicks).sort((a, b) => b[1] - a[1]);
 
-            for (const button in stats.buttonClicks) {
-                const count = stats.buttonClicks[button];
-                const li = document.createElement('li');
-                li.textContent = `${button} clicked ${count} times`;
-                statsList.appendChild(li);
-            }
+            sortedCategories.forEach(([category, count]) => {
+                const row = statsTableBody.insertRow();
+                const categoryCell = row.insertCell(0);
+                const itemCell = row.insertCell(1);
+                const totalCell = row.insertCell(2);
+
+                categoryCell.textContent = category;
+                itemCell.textContent = 'Total';
+                totalCell.textContent = count;
+            });
+
+            sortedButtonClicks.forEach(([button, count]) => {
+                const row = statsTableBody.insertRow();
+                const categoryCell = row.insertCell(0);
+                const itemCell = row.insertCell(1);
+                const totalCell = row.insertCell(2);
+
+                categoryCell.textContent = button;
+                itemCell.textContent = 'Button Clicks';
+                totalCell.textContent = count;
+            });
 
             const liTotal = document.createElement('li');
             liTotal.textContent = `Total items added: ${totalItems}`;
             statsList.appendChild(liTotal);
         }
+
+        function sortByCategory(category) {
+            statsTableBody.innerHTML = '';
+            const total = stats.categories[category];
+            const row = statsTableBody.insertRow();
+            const categoryCell = row.insertCell(0);
+            const itemCell = row.insertCell(1);
+            const totalCell = row.insertCell(2);
+
+            categoryCell.textContent = category;
+            itemCell.textContent = 'Total';
+            totalCell.textContent = total;
+        }
+
+        document.getElementById('sort-fruits').addEventListener('click', function() {
+            sortByCategory('Fruits');
+        });
+
+        document.getElementById('sort-vegetables').addEventListener('click', function() {
+            sortByCategory('Vegetables');
+        });
+
+        document.getElementById('sort-dairy').addEventListener('click', function() {
+            sortByCategory('Dairy');
+        });
+
+        document.getElementById('sort-circle').addEventListener('click', function() {
+            sortByCategory('Circle');
+        });
+
+        document.getElementById('sort-triangle').addEventListener('click', function() {
+            sortByCategory('Triangle');
+        });
+
+        document.getElementById('sort-square').addEventListener('click', function() {
+            sortByCategory('Square');
+        });
+
+        updateStats(); // Initial stats update
     </script>
 </body>
 </html>
