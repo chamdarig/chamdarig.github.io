@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inside Outside App</title>
     <style>
-        /* Add your CSS styles here for dark theme */
         body {
             font-family: 'Arial', sans-serif;
             background-color: #121212; /* Dark background */
@@ -51,6 +50,8 @@
             box-sizing: border-box;
             background-color: #333; /* Dark background for inputs and selects */
             color: #e0e0e0; /* Light text color for inputs and selects */
+            -webkit-appearance: none; /* Removes default styling for better appearance */
+            appearance: none; /* Removes default styling for better appearance */
         }
         select:focus, input[type="datetime-local"]:focus, input[type="text"]:focus {
             border-color: #1e90ff; /* Bright blue border color on focus */
@@ -241,12 +242,12 @@
         <!-- Stats Section -->
         <div class="section stats">
             <h2>Stats</h2>
-            <button id="sort-fruits">Sort by Total Fruits</button>
-            <button id="sort-vegetables">Sort by Total Vegetables</button>
-            <button id="sort-dairy">Sort by Total Dairy</button>
-            <button id="sort-circle">Sort by Total Circle</button>
-            <button id="sort-triangle">Sort by Total Triangle</button>
-            <button id="sort-square">Sort by Total Square</button>
+            <button id="sort-fruits">Sort by total Fruits</button>
+            <button id="sort-vegetables">Sort by total Vegetables</button>
+            <button id="sort-dairy">Sort by total Dairy</button>
+            <button id="sort-circle">Sort by total Circle</button>
+            <button id="sort-triangle">Sort by total Triangle</button>
+            <button id="sort-square">Sort by total Square</button>
             <table id="stats-table">
                 <thead>
                     <tr>
@@ -280,7 +281,6 @@
         const newItemCategorySelect = document.getElementById('new-item-category');
         const newItemNameInput = document.getElementById('new-item-name');
         const addNewItemButton = document.getElementById('add-new-item-button');
-        const statsList = document.createElement('ul');
 
         const stats = {
             categories: {
@@ -427,10 +427,6 @@
                 itemCell.textContent = 'Button Clicks';
                 totalCell.textContent = count;
             });
-
-            const liTotal = document.createElement('li');
-            liTotal.textContent = `Total items added: ${totalItems}`;
-            statsList.appendChild(liTotal);
         }
 
         function sortByCategory(category) {
