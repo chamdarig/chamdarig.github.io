@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+    <style>
+        .slider {
+            position: relative;
+            max-width: 100%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slides img {
+            width: 100%;
+            height: auto;
+        }
+
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slider">
+        <div class="slides">
+            <img src="https://via.placeholder.com/800x300?text=Slide+1" alt="Slide 1">
+            <img src="https://via.placeholder.com/800x300?text=Slide+2" alt="Slide 2">
+            <img src="https://via.placeholder.com/800x300?text=Slide+3" alt="Slide 3">
+        </div>
+        <a class="prev">&#10094;</a>
+        <a class="next">&#10095;</a>
+    </div>
+
+    <script>
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            let slides = document.querySelector('.slides');
+            let slideImages = slides.querySelectorAll('img');
+            if (slideIndex >= slideImages.length) { slideIndex = 0; }
+            if (slideIndex < 0) { slideIndex = slideImages.length - 1; }
+            slides.style.transform = 'translateX(' + (-slideIndex * 100) + '%)';
+        }
+
+        document.querySelector('.next').onclick = function() {
+            slideIndex++;
+            showSlides();
+        }
+
+        document.querySelector('.prev').onclick = function() {
+            slideIndex--;
+            showSlides();
+        }
+    </script>
+</body>
+</html>
