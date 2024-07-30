@@ -141,47 +141,44 @@
             </div>
         </div>
 
-                <!-- Add New Item Section -->
+        <!-- Add New Item Section -->
         <div class="section">
             <h2>Add New Item</h2>
             <div class="form-group">
-                <label for="new-item-name">New Item Name:</label>
-                <input type="text" id="new-item-name" placeholder="Enter new item name">
-            </div>
-            <button id="add-new-item-button">Add New Item</button>
-        </div>
-
-        <!-- Inside Section -->
-        <div class="section">
-            <h2>INSIDE</h2>
-            <div class="form-group">
-                <label for="food-category">Select Food Category:</label>
-                <select id="food-category">
+                <label for="new-item-category">Select Category:</label>
+                <select id="new-item-category">
                     <option value="">Select a category</option>
                     <option value="Fruits">Fruits</option>
                     <option value="Vegetables">Vegetables</option>
                     <option value="Dairy">Dairy</option>
                 </select>
             </div>
-
             <div class="form-group">
-                <label for="food-item">Select Food Item:</label>
-                <select id="food-item" disabled>
+                <label for="new-item-name">Enter New Item:</label>
+                <input type="text" id="new-item-name" placeholder="Enter new item name">
+            </div>
+            <button id="add-new-item-button">Add New Item to Selected Category</button>
+        </div>
+
+        <!-- Add Item Section -->
+        <div class="section">
+            <h2>Add Item</h2>
+            <div class="form-group">
+                <label for="item-category">Select Category:</label>
+                <select id="item-category">
+                    <option value="">Select a category</option>
+                    <option value="Fruits">Fruits</option>
+                    <option value="Vegetables">Vegetables</option>
+                    <option value="Dairy">Dairy</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="item-select">Select Item:</label>
+                <select id="item-select" disabled>
                     <option value="">Select an item</option>
                 </select>
             </div>
-
-            <button id="add-button">Add</button>
-        </div>
-
-        <!-- Add New Item Section -->
-        <div class="section">
-            <h2>Add New Item</h2>
-            <div class="form-group">
-                <label for="new-item-name">New Item Name:</label>
-                <input type="text" id="new-item-name" placeholder="Enter new item name">
-            </div>
-            <button id="add-new-item-button">Add New Item</button>
+            <button id="add-item-button">Add Item</button>
         </div>
 
         <!-- Outside Section -->
@@ -213,12 +210,14 @@
     </div>
 
     <script>
-        const foodCategorySelect = document.getElementById('food-category');
-        const foodItemSelect = document.getElementById('food-item');
-        const datetimeInput = document.getElementById('datetime');
-        const addButton = document.getElementById('add-button');
-        const addNewItemButton = document.getElementById('add-new-item-button');
+        const newItemCategorySelect = document.getElementById('new-item-category');
         const newItemNameInput = document.getElementById('new-item-name');
+        const addNewItemButton = document.getElementById('add-new-item-button');
+
+        const itemCategorySelect = document.getElementById('item-category');
+        const itemSelect = document.getElementById('item-select');
+        const addItemButton = document.getElementById('add-item-button');
+        const datetimeInput = document.getElementById('datetime');
         const foodTableBody = document.getElementById('food-table').getElementsByTagName('tbody')[0];
 
         const foodItems = {
@@ -227,39 +226,34 @@
             'Dairy': ['Milk', 'Cheese', 'Yogurt']
         };
 
-        function updateFoodItemSelect() {
-            const category = foodCategorySelect.value;
-            foodItemSelect.innerHTML = '<option value="">Select an item</option>';
+        function updateItemSelect() {
+            const category = itemCategorySelect.value;
+            itemSelect.innerHTML = '<option value="">Select an item</option>';
             if (category) {
                 foodItems[category].forEach(item => {
                     const option = document.createElement('option');
                     option.value = item;
                     option.textContent = item;
-                    foodItemSelect.appendChild(option);
+                    itemSelect.appendChild(option);
                 });
-                foodItemSelect.disabled = false;
+                itemSelect.disabled = false;
             } else {
-                foodItemSelect.disabled = true;
+                itemSelect.disabled = true;
             }
         }
 
-        foodCategorySelect.addEventListener('change', updateFoodItemSelect);
-
-        addButton.addEventListener('click', function() {
-            const category = foodCategorySelect.value;
-            const item = foodItemSelect.value;
-            if (category && item) {
-                const selectedTime = datetimeInput.value ? new Date(datetimeInput.value) : new Date();
-                addTableRow(selectedTime, category, item);
-                foodCategorySelect.value = '';
-                foodItemSelect.innerHTML = '<option value="">Select an item</option>';
-                foodItemSelect.disabled = true;
-                datetimeInput.value = '';  // Clear the datetime input
+        function updateNewItemCategorySelect() {
+            const category = newItemCategorySelect.value;
+            if (category) {
+                itemCategorySelect.value = category;
+                updateItemSelect();
             }
-        });
+        }
+
+        newItemCategorySelect.addEventListener('change', updateNewItemCategorySelect);
 
         addNewItemButton.addEventListener('click', function() {
-            const category = foodCategorySelect.value;
+            const category = newItemCategorySelect.value;
             const newItemName = newItemNameInput.value.trim();
             if (category && newItemName) {
                 if (!foodItems[category]) {
@@ -267,9 +261,25 @@
                 }
                 if (!foodItems[category].includes(newItemName)) {
                     foodItems[category].push(newItemName);
-                    updateFoodItemSelect(); // Update the food item select dropdown
+                    updateItemSelect(); // Update the item select dropdown
                     newItemNameInput.value = ''; // Clear the input field
+                    newItemCategorySelect.value = ''; // Clear the category selection
                 }
+            }
+        });
+
+        itemCategorySelect.addEventListener('change', updateItemSelect);
+
+        addItemButton.addEventListener('click', function() {
+            const category = itemCategorySelect.value;
+            const item = itemSelect.value;
+            if (category && item) {
+                const selectedTime = datetimeInput.value ? new Date(datetimeInput.value) : new Date();
+                addTableRow(selectedTime, category, item);
+                itemCategorySelect.value = '';
+                itemSelect.innerHTML = '<option value="">Select an item</option>';
+                itemSelect.disabled = true;
+                datetimeInput.value = '';  // Clear the datetime input
             }
         });
 
