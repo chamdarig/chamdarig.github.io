@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inside Outside App</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-top: 20px;
+        }
+        h2 {
+            color: #2c3e50;
+        }
+        .container {
+            max-width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 8px;
+            background: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #34495e;
+            font-size: 16px;
+        }
+        select, button, input[type="datetime-local"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+        select:focus, input[type="datetime-local"]:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .image-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .image-buttons button {
+            border: none;
+            background: none;
+            cursor: pointer;
+            padding: 0;
+        }
+        .image-buttons img {
+            width: 60px;
+            height: 60px;
+            transition: transform 0.3s ease;
+        }
+        .image-buttons img:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            button, select, input[type="datetime-local"] {
+                font-size: 14px;
+                padding: 8px;
+            }
+            .image-buttons img {
+                width: 50px;
+                height: 50px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            button, select, input[type="datetime-local"] {
+                font-size: 12px;
+                padding: 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Inside Outside App</h1>
+
+    <div class="container">
+        <!-- Set Date & Time Section -->
+        <div class="section">
+            <h2>Set Date & Time</h2>
+            <div class="form-group">
+                <label for="datetime">Select Date and Time (optional):</label>
+                <input type="datetime-local" id="datetime">
+            </div>
+        </div>
+
+        <!-- Inside Section -->
+        <div class="section">
+            <h2>INSIDE</h2>
+            <div class="form-group">
+                <label for="food-category">Select Food Category:</label>
+                <select id="food-category">
+                    <option value="">Select a category</option>
+                    <option value="Fruits">Fruits</option>
+                    <option value="Vegetables">Vegetables</option>
+                    <option value="Dairy">Dairy</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="food-item">Select Food Item:</label>
+                <select id="food-item" disabled>
+                    <option value="">Select an item</option>
+                </select>
+            </div>
+
+            <button id="add-button">Add</button>
+        </div>
+
+        <!-- Outside Section -->
+        <div class="section">
+            <h2>OUTSIDE</h2>
+            <div class="image-buttons">
+                <button id="circle-button"><img src="https://via.placeholder.com/60?text=Circle" alt="Circle"></button>
+                <button id="triangle-button"><img src="https://via.placeholder.com/60?text=Triangle" alt="Triangle"></button>
+                <button id="square-button"><img src="https://via.placeholder.com/60?text=Square" alt="Square"></button>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div class="section">
+            <h2>Results</h2>
+            <table id="food-table">
+                <thead>
+                    <tr>
+                        <th>Time Added</th>
+                        <th>Item Category</th>
+                        <th>Item Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Entries will be added here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        const foodCategorySelect = document.getElementById('food-category');
+        const foodItemSelect = document.getElementById('food-item');
+        const datetimeInput = document.getElementById('datetime');
+        const addButton = document.getElementById('add-button');
+        const foodTableBody = document.getElementById('food-table').getElementsByTagName('tbody')[0];
+
+        const foodItems = {
+            'Fruits': ['Apple', 'Banana', 'Orange'],
+            'Vegetables': ['Carrot', 'Broccoli', 'Spinach'],
+            'Dairy': ['Milk', 'Cheese', 'Yogurt']
+        };
+
+        foodCategorySelect.addEventListener('change', function() {
+            const category = this.value;
+            foodItemSelect.innerHTML = '<option value="">Select an item</option>';
+            if (category) {
+                foodItems[category].forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item;
+                    option.textContent = item;
+                    foodItemSelect.appendChild(option);
+                });
+                foodItemSelect.disabled = false;
+            } else {
+                foodItemSelect.disabled = true;
+            }
+        });
+
+        addButton.addEventListener('click', function() {
+            const category = foodCategorySelect.value;
+            const item = foodItemSelect.value;
+            if (category && item) {
+                const selectedTime = datetimeInput.value ? new Date(datetimeInput.value) : new Date();
+                addTableRow(selectedTime, category, item);
+                foodCategorySelect.value = '';
+                foodItemSelect.innerHTML = '<option value="">Select an item</option>';
+                foodItemSelect.disabled = true;
+                datetimeInput.value = '';  // Clear the datetime input
+            }
+        });
+
+        function addTableRow(time, category, item) {
+            const row = foodTableBody.insertRow();
+            const timeCell = row.insertCell(0);
+            const categoryCell = row.insertCell(1);
+            const itemCell = row.insertCell(2);
+
+            timeCell.textContent = time.toLocaleString();
+            categoryCell.textContent = category;
+            itemCell.textContent = item;
+        }
+
+        function recordButtonClick(buttonName) {
+            const selectedTime = datetimeInput.value ? new Date(datetimeInput.value) : new Date();
+            const row = foodTableBody.insertRow();
+            const timeCell = row.insertCell(0);
+            const categoryCell = row.insertCell(1);
+            const itemCell = row.insertCell(2);
+
+            timeCell.textContent = selectedTime.toLocaleString();
+            categoryCell.textContent = 'KaKa';
+            itemCell.textContent = buttonName;
+            datetimeInput.value = '';  // Clear the datetime input
+        }
+
+        document.getElementById('circle-button').addEventListener('click', function() {
+            recordButtonClick('Circle');
+        });
+
+        document.getElementById('triangle-button').addEventListener('click', function() {
+            recordButtonClick('Triangle');
+        });
+
+        document.getElementById('square-button').addEventListener('click', function() {
+            recordButtonClick('Square');
+        });
+    </script>
+</body>
+</html>
