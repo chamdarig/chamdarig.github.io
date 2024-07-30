@@ -104,6 +104,26 @@
         .image-buttons img:hover {
             transform: scale(1.1);
         }
+        .stats {
+            padding: 15px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .stats h2 {
+            margin-bottom: 15px;
+        }
+        .stats ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .stats li {
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .stats li:last-child {
+            border-bottom: none;
+        }
 
         @media (max-width: 768px) {
             .container {
@@ -207,6 +227,14 @@
                 </tbody>
             </table>
         </div>
+
+        <!-- Stats Section -->
+        <div class="section stats">
+            <h2>Stats</h2>
+            <ul id="stats-list">
+                <!-- Stats will be populated here -->
+            </ul>
+        </div>
     </div>
 
     <script>
@@ -219,11 +247,26 @@
         const addItemButton = document.getElementById('add-item-button');
         const datetimeInput = document.getElementById('datetime');
         const foodTableBody = document.getElementById('food-table').getElementsByTagName('tbody')[0];
+        const statsList = document.getElementById('stats-list');
 
         const foodItems = {
             'Fruits': ['Apple', 'Banana', 'Orange'],
             'Vegetables': ['Carrot', 'Broccoli', 'Spinach'],
             'Dairy': ['Milk', 'Cheese', 'Yogurt']
+        };
+
+        const stats = {
+            categories: {
+                'Fruits': 0,
+                'Vegetables': 0,
+                'Dairy': 0
+            },
+            buttonClicks: {
+                'Circle': 0,
+                'Triangle': 0,
+                'Square': 0
+            },
+            totalItems: 0
         };
 
         function updateItemSelect() {
@@ -264,6 +307,9 @@
                     updateItemSelect(); // Update the item select dropdown
                     newItemNameInput.value = ''; // Clear the input field
                     newItemCategorySelect.value = ''; // Clear the category selection
+                    stats.categories[category]++;
+                    stats.totalItems++;
+                    updateStats();
                 }
             }
         });
@@ -280,6 +326,9 @@
                 itemSelect.innerHTML = '<option value="">Select an item</option>';
                 itemSelect.disabled = true;
                 datetimeInput.value = '';  // Clear the datetime input
+                stats.categories[category]++;
+                stats.totalItems++;
+                updateStats();
             }
         });
 
@@ -305,6 +354,9 @@
             categoryCell.textContent = 'Button Click';
             itemCell.textContent = buttonName;
             datetimeInput.value = '';  // Clear the datetime input
+
+            stats.buttonClicks[buttonName]++;
+            updateStats();
         }
 
         document.getElementById('circle-button').addEventListener('click', function() {
@@ -318,6 +370,29 @@
         document.getElementById('square-button').addEventListener('click', function() {
             recordButtonClick('Square');
         });
+
+        function updateStats() {
+            statsList.innerHTML = '';
+            const totalItems = stats.totalItems;
+
+            for (const category in stats.categories) {
+                const count = stats.categories[category];
+                const li = document.createElement('li');
+                li.textContent = `${category}: ${count} items added`;
+                statsList.appendChild(li);
+            }
+
+            for (const button in stats.buttonClicks) {
+                const count = stats.buttonClicks[button];
+                const li = document.createElement('li');
+                li.textContent = `${button} clicked ${count} times`;
+                statsList.appendChild(li);
+            }
+
+            const liTotal = document.createElement('li');
+            liTotal.textContent = `Total items added: ${totalItems}`;
+            statsList.appendChild(liTotal);
+        }
     </script>
 </body>
 </html>
