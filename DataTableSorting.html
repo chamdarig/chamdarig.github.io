@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sortable Table</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <table id="myTable">
+        <thead>
+            <tr>
+                <th onclick="sortTable(0)">Name</th>
+                <th onclick="sortTable(1)">Age</th>
+                <th onclick="sortTable(2)">City</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Alice</td><td>30</td><td>New York</td></tr>
+            <tr><td>Bob</td><td>25</td><td>London</td></tr>
+            <tr><td>Charlie</td><td>35</td><td>Paris</td></tr>
+        </tbody>
+    </table>
+
+    <script>
+        function sortTable(n) {
+            let table = document.getElementById("myTable");
+            let rows = Array.from(table.querySelectorAll("tbody tr"));
+            let sortedRows = rows.sort((a, b) => {
+                let cellA = a.getElementsByTagName("td")[n].innerText;
+                let cellB = b.getElementsByTagName("td")[n].innerText;
+                return cellA.localeCompare(cellB, undefined, {numeric: true});
+            });
+
+            let tbody = table.querySelector("tbody");
+            tbody.innerHTML = "";
+            sortedRows.forEach(row => tbody.appendChild(row));
+        }
+    </script>
+</body>
+</html>
