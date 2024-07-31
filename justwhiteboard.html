@@ -123,9 +123,59 @@
             let eraserMode = false;
 
             // Event listeners
+            function startDrawing(e) {
+                drawing = true;
+                draw(e);
+            }
+
+            function stopDrawing() {
+                drawing = false;
+                ctx.beginPath();
+            }
+
+            function draw(e) {
+                if (!drawing) return;
+
+                const rect = canvas.getBoundingClientRect();
+                const x = (e.clientX || e.touches[0].clientX) - rect.left;
+                const y = (e.clientY || e.touches[0].clientY) - rect.top;
+
+                ctx.lineWidth = currentSize;
+                ctx.lineCap = 'round';
+
+                if (eraserMode) {
+                    ctx.globalCompositeOperation = 'destination-out'; // Enables erasing
+                    ctx.lineWidth = currentSize; // Eraser size
+                } else {
+                    ctx.globalCompositeOperation = 'source-over'; // Regular drawing
+                    ctx.strokeStyle = currentColor;
+                }
+
+                ctx.lineTo(x, y);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+            }
+
             canvas.addEventListener('mousedown', startDrawing);
             canvas.addEventListener('mouseup', stopDrawing);
             canvas.addEventListener('mousemove', draw);
+
+            canvas.addEventListener('touchstart', function(e) {
+                e.preventDefault(); // Prevent default touch actions like scrolling
+                startDrawing(e);
+            });
+
+            canvas.addEventListener('touchend', function(e) {
+                e.preventDefault();
+                stopDrawing();
+            });
+
+            canvas.addEventListener('touchmove', function(e) {
+                e.preventDefault();
+                draw(e);
+            });
+
             window.addEventListener('resize', resizeCanvas);
 
             colorPicker.addEventListener('change', (e) => {
@@ -155,36 +205,6 @@
                     currentSize = e.target.value;
                 }
             });
-
-            function startDrawing(e) {
-                drawing = true;
-                draw(e);
-            }
-
-            function stopDrawing() {
-                drawing = false;
-                ctx.beginPath();
-            }
-
-            function draw(e) {
-                if (!drawing) return;
-
-                ctx.lineWidth = currentSize;
-                ctx.lineCap = 'round';
-
-                if (eraserMode) {
-                    ctx.globalCompositeOperation = 'destination-out'; // Enables erasing
-                    ctx.lineWidth = currentSize; // Eraser size
-                } else {
-                    ctx.globalCompositeOperation = 'source-over'; // Regular drawing
-                    ctx.strokeStyle = currentColor;
-                }
-
-                ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
-            }
 
             function fillBackground(color) {
                 ctx.save(); // Save current drawing state
