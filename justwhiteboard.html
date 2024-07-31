@@ -146,6 +146,20 @@ canvas {
         canvas.height = window.innerHeight - document.querySelector('.toolbar').offsetHeight;
     }
 
+        // Function to save canvas as image
+    function saveCanvasAsImage() {
+        const link = document.createElement('a');
+        link.download = 'drawing.png';
+        link.href = canvas.toDataURL('image/png').replace("image/png", "image/octet-stream");
+        link.click();
+    }
+
+    // Add save button to toolbar
+    const saveButton = document.createElement('button');
+    saveButton.textContent = 'Save as PNG';
+    saveButton.onclick = saveCanvasAsImage;
+    document.querySelector('.toolbar').appendChild(saveButton);
+
     // Add toggle buttons or other logic to switch between pencil and eraser modes
     const eraserButton = document.createElement('button');
     eraserButton.textContent = 'Toggle Eraser';
