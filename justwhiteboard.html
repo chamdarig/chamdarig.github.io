@@ -6,25 +6,68 @@
     <title>Whiteboard</title>
     <link rel="stylesheet" href="styles.css">
 <style>
-  body {
+  * {
+    box-sizing: border-box;
     margin: 0;
-    overflow: hidden;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
     display: flex;
     flex-direction: column;
     height: 100vh;
+    background-color: #f4f4f9;
 }
 
 .toolbar {
-    background: #f0f0f0;
-    padding: 10px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: flex-start;
+    gap: 15px;
+    padding: 10px 20px;
+    background: #ffffff;
+    border-bottom: 2px solid #e0e0e0;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.toolbar label {
+    font-size: 14px;
+    color: #333;
+}
+
+.toolbar select,
+.toolbar input[type="color"],
+.toolbar button {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #f9f9f9;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.toolbar select:focus,
+.toolbar input[type="color"]:focus,
+.toolbar button:focus {
+    outline: none;
+    border-color: #3f51b5;
+}
+
+.toolbar button:hover {
+    background-color: #3f51b5;
+    color: #fff;
 }
 
 canvas {
     flex: 1;
-    border: 1px solid #ccc;
+    border: none;
+    display: block;
+    margin: 0 auto;
+    background-color: #fff; /* Default background color */
+    cursor: crosshair;
 }
 
 </style>
