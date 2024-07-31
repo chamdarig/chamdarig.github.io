@@ -107,7 +107,7 @@ canvas {
 
 
     <script>
-  document.addEventListener('DOMContentLoaded', function() {
+ document.addEventListener('DOMContentLoaded', function() {
     const canvas = document.getElementById('whiteboard');
     const ctx = canvas.getContext('2d');
 
@@ -205,10 +205,15 @@ canvas {
     }
 
     function resizeCanvas() {
-        const currentBackground = ctx.fillStyle;
+        const currentBackground = backgroundColorPicker.value;
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight - document.querySelector('.toolbar').offsetHeight;
         fillBackground(currentBackground);
+    }
+
+    function clearCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        fillBackground(backgroundColorPicker.value);
     }
 
     // Add toggle buttons or other logic to switch between pencil and eraser modes
@@ -219,6 +224,12 @@ canvas {
         eraserButton.textContent = eraserMode ? 'Switch to Pencil' : 'Switch to Eraser';
     };
     document.querySelector('.toolbar').appendChild(eraserButton);
+
+    // Add clear canvas button
+    const clearButton = document.createElement('button');
+    clearButton.textContent = 'Clear Canvas';
+    clearButton.onclick = clearCanvas;
+    document.querySelector('.toolbar').appendChild(clearButton);
 });
 
 
