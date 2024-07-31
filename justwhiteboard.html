@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whiteboard</title>
+    <link rel="stylesheet" href="styles.css">
+<style>
+  body {
+    margin: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.toolbar {
+    background: #f0f0f0;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+canvas {
+    flex: 1;
+    border: 1px solid #ccc;
+}
+
+</style>
+  
+</head>
+<body>
+    <div class="toolbar">
+        <label for="colorPicker">Color:</label>
+        <select id="colorPicker">
+            <!-- Predefined 48 colors -->
+            <option value="#000000">Black</option>
+            <option value="#FFFFFF">White</option>
+            <!-- Add other colors here -->
+        </select>
+        <input type="color" id="customColorPicker">
+
+        <label for="pencilSize">Pencil Size:</label>
+        <select id="pencilSize">
+            <option value="2">Thin</option>
+            <option value="5">Normal</option>
+            <option value="10">Bold</option>
+        </select>
+
+        <label for="eraserSize">Eraser Size:</label>
+        <select id="eraserSize">
+            <option value="10">Thin</option>
+            <option value="20">Normal</option>
+            <option value="30">Bold</option>
+        </select>
+    </div>
+    <canvas id="whiteboard"></canvas>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+    const canvas = document.getElementById('whiteboard');
+    const ctx = canvas.getContext('2d');
+
+    // Full-screen canvas setup
+    resizeCanvas();
+
+    // Tools and options
+    const colorPicker = document.getElementById('colorPicker');
+    const customColorPicker = document.getElementById('customColorPicker');
+    const pencilSize = document.getElementById('pencilSize');
+    const eraserSize = document.getElementById('eraserSize');
+
+    let drawing = false;
+    let currentColor = colorPicker.value;
+    let currentSize = pencilSize.value;
+
+    // Event listeners
+    canvas.addEventListener('mousedown', startDrawing);
+    canvas.addEventListener('mouseup', stopDrawing);
+    canvas.addEventListener('mousemove', draw);
+    window.addEventListener('resize', resizeCanvas);
+
+    colorPicker.addEventListener('change', (e) => {
+        currentColor = e.target.value;
+    });
+
+    customColorPicker.addEventListener('change', (e) => {
+        currentColor = e.target.value;
+    });
+
+    pencilSize.addEventListener('change', (e) => {
+        currentSize = e.target.value;
+    });
+
+    eraserSize.addEventListener('change', (e) => {
+        if (eraserMode) {
+            currentSize = e.target.value;
+        }
+    });
+
+    let eraserMode = false;
+    const toggleEraser = (mode) => {
+        eraserMode = mode;
+        currentColor = mode ? '#FFFFFF' : colorPicker.value;
+    };
+
+    function startDrawing(e) {
+        drawing = true;
+        draw(e);
+    }
+
+    function stopDrawing() {
+        drawing = false;
+        ctx.beginPath();
+    }
+
+    function draw(e) {
+        if (!drawing) return;
+
+        ctx.lineWidth = currentSize;
+        ctx.lineCap = 'round';
+        ctx.strokeStyle = currentColor;
+
+        ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+    }
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight - document.querySelector('.toolbar').offsetHeight;
+    }
+});
+
+    </script>
+</body>
+</html>
+
