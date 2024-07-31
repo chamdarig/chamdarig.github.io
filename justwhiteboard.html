@@ -31,8 +31,9 @@ canvas {
   
 </head>
 <body>
+    <body>
     <div class="toolbar">
-        <label for="colorPicker">Color:</label>
+        <label for="colorPicker">Pencil Color:</label>
         <select id="colorPicker">
             <!-- Predefined 48 colors -->
             <option value="#000000">Black</option>
@@ -40,6 +41,9 @@ canvas {
             <!-- Add other colors here -->
         </select>
         <input type="color" id="customColorPicker">
+
+        <label for="backgroundColorPicker">Background Color:</label>
+        <input type="color" id="backgroundColorPicker" value="#FFFFFF">
 
         <label for="pencilSize">Pencil Size:</label>
         <select id="pencilSize">
@@ -57,6 +61,8 @@ canvas {
     </div>
     <canvas id="whiteboard"></canvas>
 
+
+
     <script>
   document.addEventListener('DOMContentLoaded', function() {
     const canvas = document.getElementById('whiteboard');
@@ -64,10 +70,12 @@ canvas {
 
     // Full-screen canvas setup
     resizeCanvas();
+    fillBackground('#FFFFFF'); // Initial background color
 
     // Tools and options
     const colorPicker = document.getElementById('colorPicker');
     const customColorPicker = document.getElementById('customColorPicker');
+    const backgroundColorPicker = document.getElementById('backgroundColorPicker');
     const pencilSize = document.getElementById('pencilSize');
     const eraserSize = document.getElementById('eraserSize');
 
@@ -94,6 +102,10 @@ canvas {
         if (!eraserMode) {
             ctx.strokeStyle = currentColor;
         }
+    });
+
+    backgroundColorPicker.addEventListener('change', (e) => {
+        fillBackground(e.target.value);
     });
 
     pencilSize.addEventListener('change', (e) => {
@@ -136,29 +148,25 @@ canvas {
         ctx.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
     }
 
+    function fillBackground(color) {
+        ctx.save(); // Save current drawing state
+        ctx.globalCompositeOperation = 'destination-over'; // Draw behind existing content
+        ctx.fillStyle = color;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.restore(); // Restore previous state
+    }
+
     function toggleEraser(mode) {
         eraserMode = mode;
         currentSize = mode ? eraserSize.value : pencilSize.value;
     }
 
     function resizeCanvas() {
+        const currentBackground = ctx.fillStyle;
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight - document.querySelector('.toolbar').offsetHeight;
+        fillBackground(currentBackground);
     }
-
-        // Function to save canvas as image
-    function saveCanvasAsImage() {
-        const link = document.createElement('a');
-        link.download = 'drawing.png';
-        link.href = canvas.toDataURL('image/png').replace("image/png", "image/octet-stream");
-        link.click();
-    }
-
-    // Add save button to toolbar
-    const saveButton = document.createElement('button');
-    saveButton.textContent = 'Save as PNG';
-    saveButton.onclick = saveCanvasAsImage;
-    document.querySelector('.toolbar').appendChild(saveButton);
 
     // Add toggle buttons or other logic to switch between pencil and eraser modes
     const eraserButton = document.createElement('button');
@@ -169,6 +177,7 @@ canvas {
     };
     document.querySelector('.toolbar').appendChild(eraserButton);
 });
+
 
     </script>
 </body>
