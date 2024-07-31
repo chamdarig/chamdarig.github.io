@@ -58,7 +58,7 @@ canvas {
     <canvas id="whiteboard"></canvas>
 
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function() {
     const canvas = document.getElementById('whiteboard');
     const ctx = canvas.getContext('2d');
 
@@ -74,6 +74,7 @@ canvas {
     let drawing = false;
     let currentColor = colorPicker.value;
     let currentSize = pencilSize.value;
+    let eraserMode = false;
 
     // Event listeners
     canvas.addEventListener('mousedown', startDrawing);
@@ -83,10 +84,16 @@ canvas {
 
     colorPicker.addEventListener('change', (e) => {
         currentColor = e.target.value;
+        if (!eraserMode) {
+            ctx.strokeStyle = currentColor;
+        }
     });
 
     customColorPicker.addEventListener('change', (e) => {
         currentColor = e.target.value;
+        if (!eraserMode) {
+            ctx.strokeStyle = currentColor;
+        }
     });
 
     pencilSize.addEventListener('change', (e) => {
@@ -98,12 +105,6 @@ canvas {
             currentSize = e.target.value;
         }
     });
-
-    let eraserMode = false;
-    const toggleEraser = (mode) => {
-        eraserMode = mode;
-        currentColor = mode ? '#FFFFFF' : colorPicker.value;
-    };
 
     function startDrawing(e) {
         drawing = true;
@@ -120,7 +121,14 @@ canvas {
 
         ctx.lineWidth = currentSize;
         ctx.lineCap = 'round';
-        ctx.strokeStyle = currentColor;
+
+        if (eraserMode) {
+            ctx.globalCompositeOperation = 'destination-out'; // Enables erasing
+            ctx.lineWidth = currentSize; // Eraser size
+        } else {
+            ctx.globalCompositeOperation = 'source-over'; // Regular drawing
+            ctx.strokeStyle = currentColor;
+        }
 
         ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
         ctx.stroke();
@@ -128,10 +136,24 @@ canvas {
         ctx.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
     }
 
+    function toggleEraser(mode) {
+        eraserMode = mode;
+        currentSize = mode ? eraserSize.value : pencilSize.value;
+    }
+
     function resizeCanvas() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight - document.querySelector('.toolbar').offsetHeight;
     }
+
+    // Add toggle buttons or other logic to switch between pencil and eraser modes
+    const eraserButton = document.createElement('button');
+    eraserButton.textContent = 'Toggle Eraser';
+    eraserButton.onclick = () => {
+        toggleEraser(!eraserMode);
+        eraserButton.textContent = eraserMode ? 'Switch to Pencil' : 'Switch to Eraser';
+    };
+    document.querySelector('.toolbar').appendChild(eraserButton);
 });
 
     </script>
