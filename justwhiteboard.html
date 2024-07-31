@@ -13,23 +13,24 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
             line-height: 1.6;
             display: flex;
             flex-direction: column;
             height: 100vh;
             background-color: #f4f4f9;
+            margin: 0;
         }
 
         .toolbar {
             display: flex;
             align-items: center;
-            justify-content: flex-start;
             gap: 15px;
             padding: 10px 20px;
             background: #ffffff;
             border-bottom: 2px solid #e0e0e0;
             box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+            flex-wrap: wrap; /* Allow toolbar items to wrap on smaller screens */
         }
 
         .toolbar label {
@@ -98,6 +99,11 @@
             <option value="20">Normal</option>
             <option value="30">Bold</option>
         </select>
+
+        <!-- Buttons for clearing and saving -->
+        <button id="clearButton">Clear Canvas</button>
+        <button id="saveButton">Save as PNG</button>
+        <button id="eraserButton">Toggle Eraser</button>
     </div>
     <canvas id="whiteboard"></canvas>
 
@@ -105,6 +111,11 @@
         document.addEventListener('DOMContentLoaded', function() {
             const canvas = document.getElementById('whiteboard');
             const ctx = canvas.getContext('2d');
+
+            let drawing = false;
+            let eraserMode = false;
+            let currentColor = '#000000';
+            let currentSize = 2;
 
             // Full-screen canvas setup
             resizeCanvas();
@@ -116,11 +127,9 @@
             const backgroundColorPicker = document.getElementById('backgroundColorPicker');
             const pencilSize = document.getElementById('pencilSize');
             const eraserSize = document.getElementById('eraserSize');
-
-            let drawing = false;
-            let currentColor = colorPicker.value;
-            let currentSize = pencilSize.value;
-            let eraserMode = false;
+            const clearButton = document.getElementById('clearButton');
+            const saveButton = document.getElementById('saveButton');
+            const eraserButton = document.getElementById('eraserButton');
 
             // Event listeners
             canvas.addEventListener('mousedown', startDrawing);
@@ -155,6 +164,10 @@
                     currentSize = e.target.value;
                 }
             });
+
+            clearButton.addEventListener('click', clearCanvas);
+            saveButton.addEventListener('click', saveCanvasAsImage);
+            eraserButton.addEventListener('click', toggleEraser);
 
             function startDrawing(e) {
                 drawing = true;
@@ -194,16 +207,16 @@
                 ctx.restore(); // Restore previous state
             }
 
-            function toggleEraser(mode) {
-                eraserMode = mode;
-                currentSize = mode ? eraserSize.value : pencilSize.value;
+            function toggleEraser() {
+                eraserMode = !eraserMode;
+                eraserButton.textContent = eraserMode ? 'Switch to Pencil' : 'Switch to Eraser';
+                currentSize = eraserMode ? eraserSize.value : pencilSize.value;
             }
 
             function resizeCanvas() {
-                const currentBackground = backgroundColorPicker.value;
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight - document.querySelector('.toolbar').offsetHeight;
-                fillBackground(currentBackground);
+                fillBackground(backgroundColorPicker.value);
             }
 
             function clearCanvas() {
@@ -217,27 +230,6 @@
                 link.href = canvas.toDataURL('image/png').replace("image/png", "image/octet-stream");
                 link.click();
             }
-
-            // Add toggle buttons or other logic to switch between pencil and eraser modes
-            const eraserButton = document.createElement('button');
-            eraserButton.textContent = 'Toggle Eraser';
-            eraserButton.onclick = () => {
-                toggleEraser(!eraserMode);
-                eraserButton.textContent = eraserMode ? 'Switch to Pencil' : 'Switch to Eraser';
-            };
-            document.querySelector('.toolbar').appendChild(eraserButton);
-
-            // Add clear canvas button
-            const clearButton = document.createElement('button');
-            clearButton.textContent = 'Clear Canvas';
-            clearButton.onclick = clearCanvas;
-            document.querySelector('.toolbar').appendChild(clearButton);
-
-            // Add save button to toolbar
-            const saveButton = document.createElement('button');
-            saveButton.textContent = 'Save as PNG';
-            saveButton.onclick = saveCanvasAsImage;
-            document.querySelector('.toolbar').appendChild(saveButton);
         });
     </script>
 </body>
