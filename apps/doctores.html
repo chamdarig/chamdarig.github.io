@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Find the Best Doctor</title>
+    <style>
+        /* Add your CSS here */
+    </style>
+</head>
+<body>
+    <h1>Find the Best Doctor</h1>
+    <div id="map" style="height: 500px; width: 100%;"></div>
+    <table id="doctor-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Rating</th>
+                <th>Review</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <div id="review-form">
+        <h2>Submit a Review</h2>
+        <form id="form">
+            <label for="doctor-name">Doctor Name:</label>
+            <input type="text" id="doctor-name" name="doctor-name" required>
+            <label for="rating">Rating (1-5):</label>
+            <input type="number" id="rating" name="rating" min="1" max="5" required>
+            <label for="review">Review:</label>
+            <textarea id="review" name="review" required></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script>
+        function initMap() {
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 6,
+                center: { lat: 51.9194, lng: 19.1451 } // Center of Poland
+            });
+
+            map.addListener("click", (event) => {
+                fetchDoctors(event.latLng);
+            });
+        }
+
+        function fetchDoctors(location) {
+            fetch(`/api/doctors?lat=${location.lat()}&lng=${location.lng()}`)
+                .then(response => response.json())
+                .then(data => {
+                    populateTable(data.doctors);
+                });
+        }
+
+        function populateTable(doctors) {
+            const tbody = document.querySelector('#doctor-table tbody');
+            tbody.innerHTML = '';
+            doctors.forEach(doctor => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${doctor.name}</td>
+                    <td>${doctor.location}</td>
+                    <td>${doctor.rating}</td>
+                    <td>${doctor.review}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        document.getElementById('form').addEventListener('submit', (event) => {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            fetch('/api/review', {
+                method: 'POST',
+                body: JSON.stringify(Object.fromEntries(formData)),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Review submitted!');
+            });
+        });
+
+        // Load Google Maps API
+        const script = document.createElement('script');
+        script.src = `https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap`;
+        script.async = true;
+        document.head.appendChild(script);
+    </script>
+</body>
+</html>
