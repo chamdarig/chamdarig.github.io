@@ -49,10 +49,6 @@
             <input type="date" id="start-date">
         </div>
         <div class="form-group">
-            <label for="end-date">Period End Date:</label>
-            <input type="date" id="end-date">
-        </div>
-        <div class="form-group">
             <label for="pain-level-slider">Pain Level (1-10):</label>
             <input type="range" id="pain-level-slider" min="1" max="10" value="1">
             <span id="pain-level-value">1</span>
@@ -69,7 +65,9 @@
             <label for="notes">Notes:</label>
             <textarea id="notes" rows="4"></textarea>
         </div>
-        <button id="save-button">Save Data</button>
+        <button id="start-period-button">Start Period</button>
+        <button id="update-period-button" style="display:none;">Update Period</button>
+        <button id="end-period-button" style="display:none;">End Period</button>
     </div>
     <div class="stats">
         <h2>Statistics</h2>
@@ -81,6 +79,7 @@
             let mood = "";
             const painSlider = document.getElementById('pain-level-slider');
             const painLevelValue = document.getElementById('pain-level-value');
+            let currentPeriodIndex = null;
             
             // Update pain level display and color
             painSlider.addEventListener('input', function () {
@@ -105,21 +104,20 @@
                 });
             });
 
-            // Save data function
-            document.getElementById('save-button').addEventListener('click', function () {
+            // Start period function
+            document.getElementById('start-period-button').addEventListener('click', function () {
                 const startDate = document.getElementById('start-date').value;
-                const endDate = document.getElementById('end-date').value;
                 const painLevel = painSlider.value;
                 const notes = document.getElementById('notes').value;
 
-                if (!startDate || !endDate || !painLevel || !mood) {
+                if (!startDate || !painLevel || !mood) {
                     alert('Please fill in all fields');
                     return;
                 }
 
                 const periodData = {
                     startDate,
-                    endDate,
+                    endDate: null,  // End date is not known at the start
                     painLevel,
                     mood,
                     notes
@@ -129,8 +127,57 @@
                 data.push(periodData);
                 localStorage.setItem('periodData', JSON.stringify(data));
 
+                currentPeriodIndex = data.length - 1;
                 displayStats();
-                alert('Data saved successfully!');
+                alert('Period started successfully!');
+
+                // Toggle buttons
+                document.getElementById('start-period-button').style.display = 'none';
+                document.getElementById('update-period-button').style.display = 'inline';
+                document.getElementById('end-period-button').style.display = 'inline';
+            });
+
+            // Update period function
+            document.getElementById('update-period-button').addEventListener('click', function () {
+                const painLevel = painSlider.value;
+                const notes = document.getElementById('notes').value;
+
+                let data = JSON.parse(localStorage.getItem('periodData')) || [];
+                if (currentPeriodIndex !== null && data[currentPeriodIndex]) {
+                    data[currentPeriodIndex].painLevel = painLevel;
+                    data[currentPeriodIndex].mood = mood;
+                    data[currentPeriodIndex].notes = notes;
+                    localStorage.setItem('periodData', JSON.stringify(data));
+
+                    displayStats();
+                    alert('Period data updated successfully!');
+                }
+            });
+
+            // End period function
+            document.getElementById('end-period-button').addEventListener('click', function () {
+                const endDate = prompt("Please enter the end date of your period (YYYY-MM-DD):");
+
+                if (!endDate) {
+                    alert('End date is required to end the period.');
+                    return;
+                }
+
+                let data = JSON.parse(localStorage.getItem('periodData')) || [];
+                if (currentPeriodIndex !== null && data[currentPeriodIndex]) {
+                    data[currentPeriodIndex].endDate = endDate;
+                    localStorage.setItem('periodData', JSON.stringify(data));
+
+                    displayStats();
+                    alert('Period ended successfully!');
+
+                    // Reset buttons
+                    document.getElementById('start-period-button').style.display = 'inline';
+                    document.getElementById('update-period-button').style.display = 'none';
+                    document.getElementById('end-period-button').style.display = 'none';
+
+                    currentPeriodIndex = null;
+                }
             });
 
             // Display statistics function
@@ -149,7 +196,7 @@
                         <div>
                             <h3>Record ${index + 1}</h3>
                             <p>Start Date: ${entry.startDate}</p>
-                            <p>End Date: ${entry.endDate}</p>
+                            <p>End Date: ${entry.endDate ? entry.endDate : 'Ongoing'}</p>
                             <p>Pain Level: ${entry.painLevel}</p>
                             <p>Mood: ${entry.mood}</p>
                             <p>Notes: ${entry.notes}</p>
