@@ -205,8 +205,23 @@
                 });
             }
 
-            // Display stats on load
+            // Check if there is an ongoing period on load
+            function checkOngoingPeriod() {
+                let data = JSON.parse(localStorage.getItem('periodData')) || [];
+                currentPeriodIndex = data.findIndex(entry => entry.endDate === null);
+
+                if (currentPeriodIndex !== -1) {
+                    document.getElementById('start-period-button').style.display = 'none';
+                    document.getElementById('update-period-button').style.display = 'inline';
+                    document.getElementById('end-period-button').style.display = 'inline';
+                } else {
+                    currentPeriodIndex = null;
+                }
+            }
+
+            // Display stats and check for ongoing period on load
             displayStats();
+            checkOngoingPeriod();
         });
     </script>
 </body>
