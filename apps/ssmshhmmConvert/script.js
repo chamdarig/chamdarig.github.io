@@ -1,15 +1,23 @@
 function convertTime() {
-// Get the input values
-    let seconds = parseFloat(document.getElementById("secondsInput").value) || 0;
-    let milliseconds = parseFloat(document.getElementById("millisecondsInput").value) || 0;
+    // Get the input value
+    let inputTime = parseFloat(document.getElementById("timeInput").value);
 
-    // Convert milliseconds to seconds and add to total seconds
-    let totalSeconds = seconds + milliseconds / 1000;
+    if (isNaN(inputTime)) {
+        document.getElementById("result").textContent = "Please enter a valid number.";
+        return;
+    }
 
-    // Convert seconds to hours and minutes
-    let hours = Math.floor(totalSeconds / 3600);
-    let minutes = Math.floor((totalSeconds % 3600) / 60);
-    let remainingSeconds = (totalSeconds % 60).toFixed(2);
+    // Separate the seconds and milliseconds
+    let totalSeconds = Math.floor(inputTime);
+    let milliseconds = (inputTime - totalSeconds) * 1000;
+
+    // Add the milliseconds to the total seconds
+    let combinedSeconds = totalSeconds + milliseconds / 1000;
+
+    // Convert to hours and minutes
+    let hours = Math.floor(combinedSeconds / 3600);
+    let minutes = Math.floor((combinedSeconds % 3600) / 60);
+    let remainingSeconds = (combinedSeconds % 60).toFixed(3);
 
     // Display the result
     let result = `${hours} hours, ${minutes} minutes, and ${remainingSeconds} seconds.`;
