@@ -11,47 +11,49 @@
         <h1>Triathlon Finish Time Calculator</h1>
         <form id="triathlon-form">
             <div class="form-group">
-                <label for="swim-hours">Swim Hours:</label>
-                <input type="number" id="swim-hours" min="0" value="0">
-                <label for="swim-minutes">Minutes:</label>
-                <input type="number" id="swim-minutes" min="0" max="59" value="0">
-                <label for="swim-seconds">Seconds:</label>
-                <input type="number" id="swim-seconds" min="0" max="59" value="0">
+                <label for="race-type">Select Race Type:</label>
+                <select id="race-type">
+                    <option value="custom">Custom</option>
+                    <option value="sprint">Sprint</option>
+                    <option value="olympic">Olympic</option>
+                    <option value="half-ironman">Half Ironman</option>
+                    <option value="ironman">Ironman</option>
+                </select>
             </div>
 
             <div class="form-group">
-                <label for="t1-minutes">Transition 1 (T1) Minutes:</label>
-                <input type="number" id="t1-minutes" min="0" value="0">
-                <label for="t1-seconds">Seconds:</label>
-                <input type="number" id="t1-seconds" min="0" max="59" value="0">
+                <label for="swim-distance">Swim Distance (km):</label>
+                <input type="number" id="swim-distance" step="0.01" min="0" value="0">
+                <label for="swim-pace">Swim Pace (min/km):</label>
+                <input type="number" id="swim-pace" step="0.01" min="0" value="0">
             </div>
 
             <div class="form-group">
-                <label for="bike-hours">Bike Hours:</label>
-                <input type="number" id="bike-hours" min="0" value="0">
-                <label for="bike-minutes">Minutes:</label>
-                <input type="number" id="bike-minutes" min="0" max="59" value="0">
-                <label for="bike-seconds">Seconds:</label>
-                <input type="number" id="bike-seconds" min="0" max="59" value="0">
+                <label for="bike-distance">Bike Distance (km):</label>
+                <input type="number" id="bike-distance" step="0.01" min="0" value="0">
+                <label for="bike-pace">Bike Pace (km/h):</label>
+                <input type="number" id="bike-pace" step="0.01" min="0" value="0">
             </div>
 
             <div class="form-group">
-                <label for="t2-minutes">Transition 2 (T2) Minutes:</label>
-                <input type="number" id="t2-minutes" min="0" value="0">
-                <label for="t2-seconds">Seconds:</label>
-                <input type="number" id="t2-seconds" min="0" max="59" value="0">
+                <label for="run-distance">Run Distance (km):</label>
+                <input type="number" id="run-distance" step="0.01" min="0" value="0">
+                <label for="run-pace">Run Pace (min/km):</label>
+                <input type="number" id="run-pace" step="0.01" min="0" value="0">
             </div>
 
             <div class="form-group">
-                <label for="run-hours">Run Hours:</label>
-                <input type="number" id="run-hours" min="0" value="0">
-                <label for="run-minutes">Minutes:</label>
-                <input type="number" id="run-minutes" min="0" max="59" value="0">
-                <label for="run-seconds">Seconds:</label>
-                <input type="number" id="run-seconds" min="0" max="59" value="0">
+                <label for="t1-time">T1 Time (seconds):</label>
+                <input type="number" id="t1-time" min="0" value="0">
+            </div>
+            <div class="form-group">
+                <label for="t2-time">T2 Time (seconds):</label>
+                <input type="number" id="t2-time" min="0" value="0">
             </div>
 
             <button type="button" id="calculate-btn">Calculate Total Time</button>
+
+            <div id="validation-message"></div>
         </form>
 
         <div id="result">
