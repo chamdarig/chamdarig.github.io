@@ -1,51 +1,88 @@
 // script.js
 
+document.getElementById('race-type').addEventListener('change', setPreset);
 document.getElementById('calculate-btn').addEventListener('click', calculateTotalTime);
 
+function setPreset() {
+    const raceType = document.getElementById('race-type').value;
+    const swimDistance = document.getElementById('swim-distance');
+    const bikeDistance = document.getElementById('bike-distance');
+    const runDistance = document.getElementById('run-distance');
+
+    switch(raceType) {
+        case 'sprint':
+            swimDistance.value = 0.75;
+            bikeDistance.value = 20;
+            runDistance.value = 5;
+            break;
+        case 'olympic':
+            swimDistance.value = 1.5;
+            bikeDistance.value = 40;
+            runDistance.value = 10;
+            break;
+        case 'half-ironman':
+            swimDistance.value = 1.9;
+            bikeDistance.value = 90;
+            runDistance.value = 21.1;
+            break;
+        case 'ironman':
+            swimDistance.value = 3.8;
+            bikeDistance.value = 180;
+            runDistance.value = 42.2;
+            break;
+        default:
+            swimDistance.value = 0;
+            bikeDistance.value = 0;
+            runDistance.value = 0;
+    }
+}
+
 function calculateTotalTime() {
-    // Get swim time
-    const swimHours = parseInt(document.getElementById('swim-hours').value) || 0;
-    const swimMinutes = parseInt(document.getElementById('swim-minutes').value) || 0;
-    const swimSeconds = parseInt(document.getElementById('swim-seconds').value) || 0;
+    const swimDistance = parseFloat(document.getElementById('swim-distance').value);
+    const swimPace = parseFloat(document.getElementById('swim-pace').value);
+    const bikeDistance = parseFloat(document.getElementById('bike-distance').value);
+    const bikePace = parseFloat(document.getElementById('bike-pace').value);
+    const runDistance = parseFloat(document.getElementById('run-distance').value);
+    const runPace = parseFloat(document.getElementById('run-pace').value);
+    const t1Time = parseInt(document.getElementById('t1-time').value) || 0;
+    const t2Time = parseInt(document.getElementById('t2-time').value) || 0;
 
-    // Get T1 time
-    const t1Minutes = parseInt(document.getElementById('t1-minutes').value) || 0;
-    const t1Seconds = parseInt(document.getElementById('t1-seconds').value) || 0;
+    const validationMessage = validateInputs(swimDistance, swimPace, bikeDistance, bikePace, runDistance, runPace);
+    if (validationMessage) {
+        document.getElementById('validation-message').textContent = validationMessage;
+        return;
+    }
 
-    // Get bike time
-    const bikeHours = parseInt(document.getElementById('bike-hours').value) || 0;
-    const bikeMinutes = parseInt(document.getElementById('bike-minutes').value) || 0;
-    const bikeSeconds = parseInt(document.getElementById('bike-seconds').value) || 0;
+    document.getElementById('validation-message').textContent = '';
 
-    // Get T2 time
-    const t2Minutes = parseInt(document.getElementById('t2-minutes').value) || 0;
-    const t2Seconds = parseInt(document.getElementById('t2-seconds').value) || 0;
+    // Calculate total time in seconds
+    const swimTime = swimDistance * swimPace * 60; // swimPace is in min/km
+    const bikeTime = bikeDistance / bikePace * 3600; // bikePace is in km/h
+    const runTime = runDistance * runPace * 60; // runPace is in min/km
+    const totalTime = swimTime + bikeTime + runTime + t1Time + t2Time;
 
-    // Get run time
-    const runHours = parseInt(document.getElementById('run-hours').value) || 0;
-    const runMinutes = parseInt(document.getElementById('run-minutes').value) || 0;
-    const runSeconds = parseInt(document.getElementById('run-seconds').value) || 0;
+    // Convert to HH:MM:SS
+    const hours = Math.floor(totalTime / 3600);
+    const minutes = Math.floor((totalTime % 3600) / 60);
+    const seconds = Math.floor(totalTime % 60);
 
-    // Convert all times to seconds
-    const totalSeconds =
-        (swimHours * 3600) + (swimMinutes * 60) + swimSeconds +
-        (t1Minutes * 60) + t1Seconds +
-        (bikeHours * 3600) + (bikeMinutes * 60) + bikeSeconds +
-        (t2Minutes * 60) + t2Seconds +
-        (runHours * 3600) + (runMinutes * 60) + runSeconds;
-
-    // Convert total seconds back to hours, minutes, and seconds
-    const hours = Math.floor(totalSeconds / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    const seconds = totalSeconds % 60;
-
-    // Format time to HH:MM:SS
     const formattedTime = `${padZero(hours)}:${padZero(minutes)}:${padZero(seconds)}`;
-
-    // Display result
     document.getElementById('total-time').textContent = formattedTime;
 }
 
 function padZero(num) {
     return num.toString().padStart(2, '0');
+}
+
+function validateInputs(swimDistance, swimPace, bikeDistance, bikePace, runDistance, runPace) {
+    if (swimDistance < 0 || swimPace <= 0 || bikeDistance < 0 || bikePace <= 0 || runDistance < 0 || runPace <= 0) {
+        return 'All distances must be non-negative and all paces must be positive numbers.';
+    }
+    if (swimDistance > 4 || bikeDistance > 200 || runDistance > 50) {
+        return 'Distances seem too large. Please check your inputs.';
+    }
+    if (swimPace < 1 || swimPace > 10 || bikePace < 5 || bikePace > 60 || runPace < 3 || runPace > 20) {
+        return 'Pace values are outside of reasonable ranges.';
+    }
+    return '';
 }
