@@ -30,6 +30,15 @@
     .controls {
       margin-top: 20px;
     }
+    input[type="number"] {
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 10px;
+      width: 80px;
+      text-align: center;
+      border-radius: 4px;
+      border: none;
+    }
   </style>
 </head>
 <body>
@@ -43,8 +52,12 @@
   </div>
 
   <div class="controls">
+    <label for="tempo-input">Set Tempo (BPM):</label>
+    <input type="number" id="tempo-input" value="60" min="20" max="240">
+
     <button class="control-button" onclick="playSequence()">Play Sequence</button>
     <button class="control-button" onclick="clearSequence()">Clear Sequence</button>
+
     <p id="sequence-display">Sequence: (none)</p>
   </div>
 
@@ -60,13 +73,17 @@
       document.getElementById('sequence-display').innerText = 'Sequence: ' + displaySequence.join(' - ');
     }
 
-    // Function to play the chord sequence
+    // Function to play the chord sequence with the tempo
     function playSequence() {
       const context = new (window.AudioContext || window.webkitAudioContext)();
       let currentTime = context.currentTime;
+      const tempo = parseInt(document.getElementById('tempo-input').value); // Get the tempo from input
+
+      // Convert tempo to interval time (in seconds per chord)
+      const interval = 60 / tempo;
 
       chordSequence.forEach((chord, index) => {
-        playChord(chord, context, currentTime + index * 2.5); // Play each chord 2.5 seconds apart
+        playChord(chord, context, currentTime + index * interval); // Play each chord based on the tempo
       });
     }
 
@@ -75,7 +92,7 @@
       notes.forEach((note, index) => {
         const oscillator = context.createOscillator();
         const gainNode = context.createGain();
-        
+
         oscillator.type = 'sine'; // Use sine wave to mimic a piano sound
         oscillator.frequency.value = 440 * Math.pow(2, (note - 69) / 12); // MIDI note to frequency conversion
 
