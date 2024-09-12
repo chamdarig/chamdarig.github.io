@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sad Piano Chords Player</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #2c3e50;
+      color: #ecf0f1;
+    }
+    .chord-button {
+      background-color: #34495e;
+      border: none;
+      padding: 20px;
+      margin: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      color: #ecf0f1;
+    }
+    .chord-button:hover {
+      background-color: #1abc9c;
+    }
+  </style>
+</head>
+<body>
+
+  <div>
+    <button class="chord-button" onclick="playChord([57, 60, 64])">Am</button>
+    <button class="chord-button" onclick="playChord([53, 57, 60])">F</button>
+    <button class="chord-button" onclick="playChord([52, 55, 59])">Em</button>
+    <button class="chord-button" onclick="playChord([55, 59, 62])">G</button>
+    <button class="chord-button" onclick="playChord([62, 65, 69])">Dm</button>
+  </div>
+
+  <script>
+    function playChord(notes) {
+      const context = new (window.AudioContext || window.webkitAudioContext)();
+      notes.forEach((note, index) => {
+        const oscillator = context.createOscillator();
+        const gainNode = context.createGain();
+        
+        oscillator.type = 'sine'; // Use sine wave to mimic a piano sound.
+        oscillator.frequency.value = 440 * Math.pow(2, (note - 69) / 12); // MIDI note conversion.
+
+        oscillator.connect(gainNode);
+        gainNode.connect(context.destination);
+
+        gainNode.gain.setValueAtTime(0.8, context.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.0001, context.currentTime + 2); // Sustain for 2 seconds.
+
+        oscillator.start(context.currentTime + index * 0.05); // Small delay between notes for a realistic chord.
+        oscillator.stop(context.currentTime + 2);
+      });
+    }
+  </script>
+
+</body>
+</html>
