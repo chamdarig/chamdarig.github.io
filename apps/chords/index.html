@@ -3,60 +3,98 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sad Piano Chords Player</title>
+  <title>Sad Piano Chords Sequencer</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
       background-color: #2c3e50;
       color: #ecf0f1;
     }
-    .chord-button {
+    .chord-button, .control-button {
       background-color: #34495e;
       border: none;
-      padding: 20px;
+      padding: 15px;
       margin: 10px;
       cursor: pointer;
       font-size: 16px;
       color: #ecf0f1;
     }
-    .chord-button:hover {
+    .chord-button:hover, .control-button:hover {
       background-color: #1abc9c;
+    }
+    .controls {
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
 
   <div>
-    <button class="chord-button" onclick="playChord([57, 60, 64])">Am</button>
-    <button class="chord-button" onclick="playChord([53, 57, 60])">F</button>
-    <button class="chord-button" onclick="playChord([52, 55, 59])">Em</button>
-    <button class="chord-button" onclick="playChord([55, 59, 62])">G</button>
-    <button class="chord-button" onclick="playChord([62, 65, 69])">Dm</button>
+    <button class="chord-button" onclick="addChordToSequence([57, 60, 64], 'Am')">Am</button>
+    <button class="chord-button" onclick="addChordToSequence([53, 57, 60], 'F')">F</button>
+    <button class="chord-button" onclick="addChordToSequence([52, 55, 59], 'Em')">Em</button>
+    <button class="chord-button" onclick="addChordToSequence([55, 59, 62], 'G')">G</button>
+    <button class="chord-button" onclick="addChordToSequence([62, 65, 69], 'Dm')">Dm</button>
+  </div>
+
+  <div class="controls">
+    <button class="control-button" onclick="playSequence()">Play Sequence</button>
+    <button class="control-button" onclick="clearSequence()">Clear Sequence</button>
+    <p id="sequence-display">Sequence: (none)</p>
   </div>
 
   <script>
-    function playChord(notes) {
+    let chordSequence = []; // Stores the sequence of chords
+    let displaySequence = []; // Stores the names of the chords for display
+
+    // Function to add a chord to the sequence
+    function addChordToSequence(notes, chordName) {
+      chordSequence.push(notes); // Add the notes to the sequence
+      displaySequence.push(chordName); // Add the chord name to display
+
+      document.getElementById('sequence-display').innerText = 'Sequence: ' + displaySequence.join(' - ');
+    }
+
+    // Function to play the chord sequence
+    function playSequence() {
       const context = new (window.AudioContext || window.webkitAudioContext)();
+      let currentTime = context.currentTime;
+
+      chordSequence.forEach((chord, index) => {
+        playChord(chord, context, currentTime + index * 2.5); // Play each chord 2.5 seconds apart
+      });
+    }
+
+    // Function to play a single chord
+    function playChord(notes, context, startTime) {
       notes.forEach((note, index) => {
         const oscillator = context.createOscillator();
         const gainNode = context.createGain();
         
-        oscillator.type = 'sine'; // Use sine wave to mimic a piano sound.
-        oscillator.frequency.value = 440 * Math.pow(2, (note - 69) / 12); // MIDI note conversion.
+        oscillator.type = 'sine'; // Use sine wave to mimic a piano sound
+        oscillator.frequency.value = 440 * Math.pow(2, (note - 69) / 12); // MIDI note to frequency conversion
 
         oscillator.connect(gainNode);
         gainNode.connect(context.destination);
 
-        gainNode.gain.setValueAtTime(0.8, context.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.0001, context.currentTime + 2); // Sustain for 2 seconds.
+        gainNode.gain.setValueAtTime(0.8, startTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.0001, startTime + 2); // Sustain for 2 seconds
 
-        oscillator.start(context.currentTime + index * 0.05); // Small delay between notes for a realistic chord.
-        oscillator.stop(context.currentTime + 2);
+        oscillator.start(startTime + index * 0.05); // Small delay between notes for realism
+        oscillator.stop(startTime + 2);
       });
+    }
+
+    // Function to clear the chord sequence
+    function clearSequence() {
+      chordSequence = [];
+      displaySequence = [];
+      document.getElementById('sequence-display').innerText = 'Sequence: (none)';
     }
   </script>
 
