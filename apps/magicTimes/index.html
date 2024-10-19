@@ -115,6 +115,27 @@ th {
         </tbody>
     </table>
 
+    <h1>Generate Hours in 24-hour Format</h1>
+  <button onclick="generateHours()">Generate Hours</button>
+
+  <div id="hours-container"></div>
+
+  <script>
+    function generateHours() {
+      let container = document.getElementById("hours-container");
+      container.innerHTML = ""; // Clear previous content
+
+      for (let hour = 0; hour < 24; hour++) {
+        for (let minute = 0; minute < 60; minute++) {
+          let formattedHour = hour.toString().padStart(2, '0');
+          let formattedMinute = minute.toString().padStart(2, '0');
+          container.innerHTML += `${formattedHour}:${formattedMinute}\n`;
+        }
+      }
+    }
+  </script>
+
+
     <script src="app.js"></script>
 </body>
 </html>
