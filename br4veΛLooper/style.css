@@ -1,80 +1,79 @@
-/* General Styles */
+/* General body styles */
 body {
-    background-color: #333119; /* Dark background */
-    color: #CFCA84; /* Light text color */
-    font-family: 'Arial', sans-serif;
+    background-color: #333119; /* Dark background for the page */
+    color: #CFCA84; /* Light yellowish text color */
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
     margin: 0;
     padding: 0;
-    line-height: 1.6;
 }
 
+/* Header styles */
+h1, h2, h3 {
+    color: #FAF175; /* Highlight color for headers */
+}
+
+/* Links */
 a {
-    color: #CFCA84; /* Links in light text color */
+    color: #FAF175; /* Highlight color for links */
     text-decoration: none;
 }
 
 a:hover {
-    color: #FAF175; /* Hover color for links (yellow highlight) */
+    text-decoration: underline;
 }
 
-/* Header Styles */
-header {
-    background-color: #333119; /* Dark background */
-    padding: 20px;
-    text-align: center;
-}
-
-header h1 {
-    font-size: 3rem;
-    color: #CFCA84; /* Light text for header */
-    margin: 0;
-}
-
-/* Navigation Styles */
-nav {
-    background-color: #333119; /* Dark background */
+/* Code block styles */
+pre, code {
+    background-color: #504E35; /* Code block background */
+    color: #CFCA84; /* Text color in code blocks */
     padding: 10px;
-    text-align: center;
+    border-radius: 5px;
+    font-family: 'Courier New', Courier, monospace;
 }
 
-nav a {
-    color: #CFCA84; /* Links in light text color */
-    margin: 0 15px;
-    font-size: 1.2rem;
-}
-
-nav a:hover {
-    color: #FAF175; /* Hover color for navigation links (yellow highlight) */
-}
-
-/* Main Content Styles */
-.main-content {
-    padding: 40px 20px;
-}
-
-h2, h3 {
-    color: #CFCA84; /* Light text for subheadings */
-}
-
+/* Paragraphs and text styling */
 p {
-    color: #CFCA84; /* Light text for paragraphs */
     font-size: 1.1rem;
+    margin-bottom: 1.5em;
 }
 
-/* Highlighted Text */
-.highlight {
-    color: #FAF175; /* Yellow for highlighted text */
-    font-weight: bold;
+/* Styling for lists */
+ul, ol {
+    padding-left: 20px;
+}
+
+/* Button styling */
+button {
+    background-color: #FAF175; /* Button highlight color */
+    color: #333119;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #CFCA84;
+}
+
+/* General layout styling */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    padding: 20px 0;
+    text-align: center;
+    background-color: #504E35;
 }
 
 footer {
-    background-color: #333119; /* Dark background */
-    padding: 20px;
+    padding: 10px 0;
     text-align: center;
-    color: #CFCA84; /* Light text for footer */
+    background-color: #333119;
+    color: #CFCA84;
 }
 
-footer p {
-    margin: 0;
-    font-size: 1rem;
-}
