@@ -1,7 +1,7 @@
 /* General Styles */
 body {
-    background-color: #02161b; /* Dark background */
-    color: #eec873; /* Light golden text color */
+    background-color: #333119; /* Dark background */
+    color: #CFCA84; /* Light text color */
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
@@ -9,42 +9,42 @@ body {
 }
 
 a {
-    color: #eec873; /* Links in golden color */
+    color: #CFCA84; /* Links in light text color */
     text-decoration: none;
 }
 
 a:hover {
-    color: #1e4952; /* Hover color for links */
+    color: #FAF175; /* Hover color for links (yellow highlight) */
 }
 
 /* Header Styles */
 header {
-    background-color: #1e4952; /* Highlight color for the header */
+    background-color: #333119; /* Dark background */
     padding: 20px;
     text-align: center;
 }
 
 header h1 {
     font-size: 3rem;
-    color: #eec873; /* Golden text for header */
+    color: #CFCA84; /* Light text for header */
     margin: 0;
 }
 
 /* Navigation Styles */
 nav {
-    background-color: #42616b; /* Highlight color for navigation */
+    background-color: #333119; /* Dark background */
     padding: 10px;
     text-align: center;
 }
 
 nav a {
-    color: #eec873; /* Golden links */
+    color: #CFCA84; /* Links in light text color */
     margin: 0 15px;
     font-size: 1.2rem;
 }
 
 nav a:hover {
-    color: #1e4952; /* Hover color for navigation links */
+    color: #FAF175; /* Hover color for navigation links (yellow highlight) */
 }
 
 /* Main Content Styles */
@@ -53,25 +53,25 @@ nav a:hover {
 }
 
 h2, h3 {
-    color: #eec873; /* Golden subheadings */
+    color: #CFCA84; /* Light text for subheadings */
 }
 
 p {
-    color: #eec873; /* Golden text for paragraphs */
+    color: #CFCA84; /* Light text for paragraphs */
     font-size: 1.1rem;
 }
 
 /* Highlighted Text */
 .highlight {
-    color: #1e4952; /* Darker green highlight */
+    color: #FAF175; /* Yellow for highlighted text */
     font-weight: bold;
 }
 
 footer {
-    background-color: #42616b; /* Highlight color for footer */
+    background-color: #333119; /* Dark background */
     padding: 20px;
     text-align: center;
-    color: #eec873;
+    color: #CFCA84; /* Light text for footer */
 }
 
 footer p {
