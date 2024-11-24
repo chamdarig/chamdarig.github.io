@@ -1,7 +1,7 @@
 /* General body styles */
 body {
-    background-color: #242424; /* New dark background for the page */
-    color: #CFCA84; /* Light yellowish text color */
+    background-color: #121212; /* Very dark grey background */
+    color: #D3D3D3; /* Light grey text color */
     font-family: Arial, sans-serif;
     line-height: 1.6;
     margin: 0;
@@ -10,12 +10,12 @@ body {
 
 /* Header styles */
 h1, h2, h3 {
-    color: #FAF175; /* Highlight color for headers */
+    color: #A9A9A9; /* Light grey color for headers */
 }
 
 /* Links */
 a {
-    color: #FAF175; /* Highlight color for links */
+    color: #A9A9A9; /* Light grey color for links */
     text-decoration: none;
 }
 
@@ -25,8 +25,8 @@ a:hover {
 
 /* Code block styles */
 pre, code {
-    background-color: #504E35; /* Code block background */
-    color: #CFCA84; /* Text color in code blocks */
+    background-color: #333333; /* Dark grey background for code blocks */
+    color: #D3D3D3; /* Light grey text color in code blocks */
     padding: 10px;
     border-radius: 5px;
     font-family: 'Courier New', Courier, monospace;
@@ -45,8 +45,8 @@ ul, ol {
 
 /* Button styling */
 button {
-    background-color: #FAF175; /* Button highlight color */
-    color: #242424; /* Dark text color for buttons */
+    background-color: #A9A9A9; /* Light grey button color */
+    color: #121212; /* Very dark grey text color for buttons */
     border: none;
     padding: 10px 20px;
     cursor: pointer;
@@ -54,7 +54,7 @@ button {
 }
 
 button:hover {
-    background-color: #CFCA84;
+    background-color: #D3D3D3; /* Lighter grey for hover effect */
 }
 
 /* General layout styling */
@@ -67,13 +67,12 @@ button:hover {
 header {
     padding: 20px 0;
     text-align: center;
-    background-color: #504E35;
+    background-color: #333333; /* Dark grey background for header */
 }
 
 footer {
     padding: 10px 0;
     text-align: center;
-    background-color: #242424; /* Matching the background color for the footer */
-    color: #CFCA84;
+    background-color: #121212; /* Very dark grey for the footer */
+    color: #D3D3D3; /* Light grey text color for footer */
 }
-
