@@ -1,79 +1,79 @@
 /* General body styles */
 body {
-    background-color: #333119; /* Dark background for the page */
-    color: #CFCA84; /* Light yellowish text color */
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
+    font-family: 'Arial', sans-serif;
+    background-color: #2a2a2a; /* Dark grey background */
+    color: #f1e1a6; /* Soft yellow text color */
     margin: 0;
     padding: 0;
-}
-
-/* Header styles */
-h1, h2, h3 {
-    color: #FAF175; /* Highlight color for headers */
-}
-
-/* Links */
-a {
-    color: #FAF175; /* Highlight color for links */
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-/* Code block styles */
-pre, code {
-    background-color: #504E35; /* Code block background */
-    color: #CFCA84; /* Text color in code blocks */
-    padding: 10px;
-    border-radius: 5px;
-    font-family: 'Courier New', Courier, monospace;
-}
-
-/* Paragraphs and text styling */
-p {
-    font-size: 1.1rem;
-    margin-bottom: 1.5em;
-}
-
-/* Styling for lists */
-ul, ol {
-    padding-left: 20px;
-}
-
-/* Button styling */
-button {
-    background-color: #FAF175; /* Button highlight color */
-    color: #333119;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-button:hover {
-    background-color: #CFCA84;
-}
-
-/* General layout styling */
-.container {
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px;
+    line-height: 1.6;
 }
 
 header {
-    padding: 20px 0;
+    background-color: #1f1f1f; /* Darker grey for header */
+    padding: 20px;
     text-align: center;
-    background-color: #504E35;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+header p {
+    font-size: 1.2em;
+}
+
+nav {
+    background-color: #333;
+    padding: 10px;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 15px;
+}
+
+nav ul li a {
+    color: #f1e1a6;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+section {
+    padding: 20px;
+    margin: 20px;
+}
+
+section h2 {
+    font-size: 2em;
+    color: #f1e1a6;
+}
+
+pre {
+    background-color: #1f1f1f;
+    border-radius: 5px;
+    padding: 15px;
+    color: #f1e1a6;
+    font-family: 'Courier New', monospace;
+    overflow-x: auto;
 }
 
 footer {
-    padding: 10px 0;
+    background-color: #1f1f1f;
+    color: #f1e1a6;
+    padding: 10px;
     text-align: center;
-    background-color: #333119;
-    color: #CFCA84;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
-
