@@ -15,7 +15,7 @@ body {
 
 a {
     text-decoration: none;
-    color: #FFD700; /* Yellow */
+    color: #DAA520; /* Dimmed Yellow */
 }
 
 a:hover {
@@ -36,7 +36,7 @@ header .logo-container {
 header .logo {
     font-size: 2.5rem;
     font-weight: bold;
-    color: #FFD700; /* Yellow */
+    color: #DAA520; /* Dimmed Yellow */
 }
 
 nav ul {
@@ -58,7 +58,7 @@ nav ul li a {
 /* Hero Section */
 .hero {
     background-color: #111;
-    color: #FFD700;
+    color: #DAA520; /* Dimmed Yellow */
     text-align: center;
     padding: 50px 20px;
 }
@@ -74,7 +74,7 @@ nav ul li a {
 }
 
 .cta-button {
-    background-color: #FFD700;
+    background-color: #DAA520; /* Dimmed Yellow */
     color: #000;
     padding: 10px 20px;
     font-size: 1.2rem;
@@ -85,7 +85,7 @@ nav ul li a {
 }
 
 .cta-button:hover {
-    background-color: #cc9a00;
+    background-color: #b88d00;
 }
 
 /* About Section */
@@ -97,7 +97,7 @@ nav ul li a {
 
 .about h2 {
     font-size: 2rem;
-    color: #FFD700;
+    color: #DAA520; /* Dimmed Yellow */
 }
 
 .about p {
@@ -111,7 +111,7 @@ nav ul li a {
 .blog {
     padding: 40px 20px;
     background-color: #333;
-    color: #FFD700;
+    color: #DAA520; /* Dimmed Yellow */
     text-align: center;
 }
 
@@ -157,5 +157,5 @@ footer .social-links {
 
 footer .social-links a {
     margin: 0 10px;
-    color: #FFD700;
+    color: #DAA520; /* Dimmed Yellow */
 }
