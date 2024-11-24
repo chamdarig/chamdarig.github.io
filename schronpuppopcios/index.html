@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Property Manager Mockup</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>Property Manager Mockup</h1>
+      <nav>
+        <button onclick="showPage('dashboard')">Dashboard</button>
+        <button onclick="showPage('calendar')">Calendar</button>
+        <button onclick="showPage('users')">Users</button>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Dashboard Page -->
+      <section id="dashboard" class="page">
+        <h2>Dashboard</h2>
+        <p>Welcome to the Property Manager mockup!</p>
+        <p>This is a brainstorming version running in browser memory.</p>
+      </section>
+
+      <!-- Calendar Page -->
+      <section id="calendar" class="page hidden">
+        <h2>Calendar</h2>
+        <div id="calendar-container"></div>
+        <button onclick="addEvent()">Add Event</button>
+      </section>
+
+      <!-- Users Page -->
+      <section id="users" class="page hidden">
+        <h2>Users</h2>
+        <ul id="user-list"></ul>
+        <button onclick="addUser()">Add User</button>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
