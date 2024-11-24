@@ -1,7 +1,7 @@
 /* General body styles */
 body {
     background-color: #121212; /* Very dark grey background */
-    color: #D3D3D3; /* Light grey text color */
+    color: #ffecb3; /* Light grey text color */
     font-family: Arial, sans-serif;
     line-height: 1.6;
     margin: 0;
@@ -10,7 +10,7 @@ body {
 
 /* Header styles */
 h1, h2, h3 {
-    color: #A9A9A9; /* Light grey color for headers */
+    color: #ffd24d; /* Light grey color for headers */
 }
 
 /* Links */
@@ -74,5 +74,5 @@ footer {
     padding: 10px 0;
     text-align: center;
     background-color: #121212; /* Very dark grey for the footer */
-    color: #D3D3D3; /* Light grey text color for footer */
+    color: #ffecb3; /* Light grey text color for footer */
 }
