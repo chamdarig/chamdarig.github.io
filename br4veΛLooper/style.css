@@ -1,79 +1,80 @@
-/* General body styles */
+/* General Styles */
 body {
+    background-color: #02161b; /* Dark background */
+    color: #eec873; /* Light golden text color */
     font-family: 'Arial', sans-serif;
-    background-color: #032A33; /* Dark greenish-blue */
-    color: #eec873; /* Soft yellow text */
     margin: 0;
     padding: 0;
     line-height: 1.6;
 }
 
+a {
+    color: #eec873; /* Links in golden color */
+    text-decoration: none;
+}
+
+a:hover {
+    color: #1e4952; /* Hover color for links */
+}
+
+/* Header Styles */
 header {
-    background-color: #336666; /* Medium teal */
+    background-color: #1e4952; /* Highlight color for the header */
     padding: 20px;
     text-align: center;
 }
 
 header h1 {
+    font-size: 3rem;
+    color: #eec873; /* Golden text for header */
     margin: 0;
-    font-size: 2.5em;
 }
 
-header p {
-    font-size: 1.2em;
-}
-
+/* Navigation Styles */
 nav {
-    background-color: #336666; /* Medium teal */
+    background-color: #42616b; /* Highlight color for navigation */
     padding: 10px;
     text-align: center;
 }
 
-nav ul {
-    list-style: none;
-    padding: 0;
+nav a {
+    color: #eec873; /* Golden links */
+    margin: 0 15px;
+    font-size: 1.2rem;
 }
 
-nav ul li {
-    display: inline;
-    margin-right: 15px;
+nav a:hover {
+    color: #1e4952; /* Hover color for navigation links */
 }
 
-nav ul li a {
-    color: #FFCC66; /* Soft yellow links */
-    text-decoration: none;
+/* Main Content Styles */
+.main-content {
+    padding: 40px 20px;
+}
+
+h2, h3 {
+    color: #eec873; /* Golden subheadings */
+}
+
+p {
+    color: #eec873; /* Golden text for paragraphs */
+    font-size: 1.1rem;
+}
+
+/* Highlighted Text */
+.highlight {
+    color: #1e4952; /* Darker green highlight */
     font-weight: bold;
 }
 
-nav ul li a:hover {
-    text-decoration: underline;
-}
-
-section {
-    padding: 20px;
-    margin: 20px;
-}
-
-section h2 {
-    font-size: 2em;
-    color: #FFCC66; /* Soft yellow */
-}
-
-pre {
-    background-color: #336666; /* Medium teal background */
-    border-radius: 5px;
-    padding: 15px;
-    color: #FFCC66; /* Soft yellow text */
-    font-family: 'Courier New', monospace;
-    overflow-x: auto;
-}
-
 footer {
-    background-color: #336666; /* Medium teal */
-    color: #FFCC66; /* Soft yellow */
-    padding: 10px;
+    background-color: #42616b; /* Highlight color for footer */
+    padding: 20px;
     text-align: center;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+    color: #eec873;
+}
+
+footer p {
+    margin: 0;
+    font-size: 1rem;
 }
