@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Input Validation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    input[type="text"] {
+      width: 300px;
+      padding: 8px;
+      margin-bottom: 10px;
+    }
+    .info {
+      margin-top: 10px;
+      color: #555;
+    }
+    .info.error {
+      color: red;
+    }
+    .info.success {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <h2>Input Validation</h2>
+  <label for="inputField">Type something (min 10 characters):</label><br>
+  <input type="text" id="inputField" maxlength="50">
+  <div id="feedback" class="info"></div>
+
+  <script>
+    const inputField = document.getElementById('inputField');
+    const feedback = document.getElementById('feedback');
+    const minChars = 10;
+
+    inputField.addEventListener('input', () => {
+      const typedLength = inputField.value.length;
+      const remaining = minChars - typedLength;
+
+      if (typedLength >= minChars) {
+        feedback.textContent = `✅ You've typed ${typedLength} characters, which meets the requirement.`;
+        feedback.className = 'info success';
+      } else {
+        feedback.textContent = `❌ You've typed ${typedLength} characters. You need ${remaining} more to meet the minimum requirement.`;
+        feedback.className = 'info error';
+      }
+    });
+  </script>
+</body>
+</html>
