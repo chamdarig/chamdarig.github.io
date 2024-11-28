@@ -9,7 +9,7 @@ body {
 #game-container {
   margin-top: 20px;
 }
-
+/*
 #number-pad {
   display: grid;
   grid-template-columns: repeat(5, 60px);
@@ -17,6 +17,15 @@ body {
   justify-content: center;
   margin-bottom: 20px;
 }
+*/
+#number-pad {
+  display: grid;
+  grid-template-columns: repeat(3, 60px);
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
 
 button.number {
   width: 60px;
