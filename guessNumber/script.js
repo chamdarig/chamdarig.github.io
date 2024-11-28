@@ -9,23 +9,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const userSelection = [];
 
-  // Create number buttons (0-9)
-  for (let i = 0; i <= 9; i++) {
+  // Numbers in phone keypad order
+  const phonePadOrder = [1, 2, 3, 4, 5, 6, 7, 8, 9, null, 0];
+
+  phonePadOrder.forEach((num) => {
     const btn = document.createElement("button");
-    btn.textContent = i;
-    btn.classList.add("number");
-    btn.addEventListener("click", () => {
-      if (userSelection.length < 6 && !btn.classList.contains("selected")) {
-        btn.classList.add("selected");
-        userSelection.push(i);
-        updateSelection();
-        if (userSelection.length === 6) {
-          checkButton.disabled = false;
+    if (num !== null) {
+      btn.textContent = num;
+      btn.classList.add("number");
+      btn.addEventListener("click", () => {
+        if (userSelection.length < 6 && !btn.classList.contains("selected")) {
+          btn.classList.add("selected");
+          userSelection.push(num);
+          updateSelection();
+          if (userSelection.length === 6) {
+            checkButton.disabled = false;
+          }
         }
-      }
-    });
+      });
+    } else {
+      btn.style.visibility = "hidden"; // Placeholder for empty spot
+    }
     numberPad.appendChild(btn);
-  }
+  });
 
   // Update the selected numbers display
   function updateSelection() {
