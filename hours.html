@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Times</title>
+</head>
+<body>
+
+    <h1>Generate All Possible Times</h1>
+    <button id="generateTimesButton">Generate Times</button>
+    <ul id="timeList"></ul>
+
+    <h2>4-Digit Representation</h2>
+    <button id="convertButton">Convert to 4-Digit Numbers</button>
+    <ul id="convertedList"></ul>
+
+    <script>
+        // Function to generate all possible times in hh:mm format
+        function generateAllPossibleTimes() {
+            const times = [];
+            
+            for (let hour = 0; hour < 24; hour++) {
+                for (let minute = 0; minute < 60; minute++) {
+                    const formattedTime = `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
+                    times.push(formattedTime);
+                }
+            }
+            
+            return times;
+        }
+
+        // Function to convert hh:mm to 4-digit number (hhmm)
+        function convertTo4Digit(times) {
+            return times.map(time => time.replace(":", ""));
+        }
+
+        // Event listener for the "Generate Times" button
+        document.getElementById('generateTimesButton').addEventListener('click', function() {
+            const allTimes = generateAllPossibleTimes();
+            const timeList = document.getElementById('timeList');
+            timeList.innerHTML = ""; // Clear the previous list
+
+            allTimes.forEach(time => {
+                const li = document.createElement('li');
+                li.textContent = time;
+                timeList.appendChild(li);
+            });
+
+            // Store the generated times globally for conversion
+            window.allTimes = allTimes;
+        });
+
+        // Event listener for the "Convert to 4-Digit Numbers" button
+        document.getElementById('convertButton').addEventListener('click', function() {
+            if (!window.allTimes) {
+                alert("Please generate the times first.");
+                return;
+            }
+            
+            const convertedTimes = convertTo4Digit(window.allTimes);
+            const convertedList = document.getElementById('convertedList');
+            convertedList.innerHTML = ""; // Clear the previous list
+
+            convertedTimes.forEach(time => {
+                const li = document.createElement('li');
+                li.textContent = time;
+                convertedList.appendChild(li);
+            });
+        });
+    </script>
+
+</body>
+</html>
