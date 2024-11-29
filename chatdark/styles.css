@@ -146,3 +146,56 @@ code {
     color: #ffcc99; /* Accent color for code */
     display: block;
 }
+/* Tags Styling */
+.tags {
+    margin-top: 10px;
+}
+
+.tags span {
+    display: inline-block;
+    background-color: #0078d7;
+    color: white;
+    border-radius: 3px;
+    padding: 5px 10px;
+    margin-right: 5px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.tags span:hover {
+    background-color: #005bb5;
+}
+
+/* Archives Section */
+.archives {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #2a2a40;
+    background-color: #2b2b3d;
+    border-radius: 5px;
+}
+
+.archives h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: #ffffff;
+}
+
+.archives ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.archives ul li {
+    margin-bottom: 5px;
+}
+
+.archives ul li a {
+    color: #0078d7;
+    text-decoration: none;
+}
+
+.archives ul li a:hover {
+    text-decoration: underline;
+}
