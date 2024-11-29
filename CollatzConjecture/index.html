@@ -1,17 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Collatz Conjecture Visualization</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collatz Sequence Animation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #collatz-visualization {
+            width: 80%;
+            height: 400px;
+            margin: 20px auto;
+            border: 1px solid black;
+        }
+        button, input {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-  <h1>Collatz Conjecture Visualization</h1>
-  <div id="canvas-container">
-    <svg id="collatz-visualization" width="800" height="600"></svg>
-  </div>
-  <button id="start-button">Start Collatz Sequence</button>
-  <script src="app.js"></script>
+    <h1>Collatz Sequence Animation</h1>
+    <div>
+        <input type="number" id="starting-number" value="27" min="1" placeholder="Enter starting number">
+        <button id="start-button">Start Animation</button>
+        <button id="reset-button">Reset</button>
+    </div>
+    <svg id="collatz-visualization"></svg>
+
+    <script>
+        const svg = document.getElementById("collatz-visualization");
+
+        // Collatz sequence generator function
+        function collatzSequence(n) {
+            const sequence = [];
+            while (n !== 1) {
+                sequence.push(n);
+                n = (n % 2 === 0) ? n / 2 : 3 * n + 1;
+            }
+            sequence.push(1); // End with 1
+            return sequence;
+        }
+
+        // Animate the Collatz sequence
+        function animateCollatz() {
+            svg.innerHTML = ""; // Clear previous visualizations
+            const startingNumber = parseInt(document.getElementById("starting-number").value);
+            const sequence = collatzSequence(startingNumber);
+            let x = 50;
+            let y = 300;
+            let step = 0;
+            let bounceDirection = 1; // Bounce direction for y-axis movement
+
+            // Function to animate each step with effects
+            function drawStep() {
+                if (step >= sequence.length) return;
+
+                const num = sequence[step];
+                const isEven = num % 2 === 0;
+                const color = isEven ? "blue" : "orange"; // Blue for even, orange for odd
+
+                // Create a circle for the current number
+                const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                circle.setAttribute("cx", x);
+                circle.setAttribute("cy", y);
+                circle.setAttribute("r", 15);
+                circle.setAttribute("fill", color);
+                circle.setAttribute("stroke", "black");
+                svg.appendChild(circle);
+
+                // Add text inside the circle
+                const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                text.setAttribute("x", x);
+                text.setAttribute("y", y);
+                text.setAttribute("text-anchor", "middle");
+                text.setAttribute("fill", "white");
+                text.setAttribute("dy", ".35em");
+                text.textContent = num;
+                svg.appendChild(text);
+
+                // Create a curved path (arc) from the previous number to the current one
+                if (step > 0) {
+                    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                    const prevX = x - 60;
+                    const prevY = y - 50;
+                    const curve = `M${prevX} ${prevY} Q${x - 30} ${y + 20}, ${x} ${y}`;
+                    path.setAttribute("d", curve);
+                    path.setAttribute("stroke", "black");
+                    path.setAttribute("fill", "transparent");
+                    svg.appendChild(path);
+                }
+
+                // Update x and y for the next step
+                x += 60;
+                y += bounceDirection * (Math.random() * 40 + 10); // Add random bounce
+                bounceDirection *= -1; // Reverse bounce direction
+
+                step++;
+
+                // Call the function again to animate the next step
+                setTimeout(drawStep, 600); // 600ms delay between steps
+            }
+
+            // Start the animation
+            drawStep();
+        }
+
+        // Reset the animation
+        function resetAnimation() {
+            svg.innerHTML = ""; // Clear previous visualizations
+            document.getElementById("starting-number").value = 27; // Reset input to default
+        }
+
+        // Event listeners
+        document.getElementById("start-button").addEventListener("click", animateCollatz);
+        document.getElementById("reset-button").addEventListener("click", resetAnimation);
+    </script>
 </body>
 </html>
