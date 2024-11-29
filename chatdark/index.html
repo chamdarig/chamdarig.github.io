@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Interface</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+    <div class="chat-container">
+        <!-- Chat Messages Area -->
+        <div class="chat-messages">
+            <!-- Example messages -->
+            <div class="message assistant">Hello! How can I assist you today?</div>
+            <div class="message user">I need some help with a CSS layout.</div>
+            <div class="message assistant">Sure! Could you share more details about the layout?</div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="input-area">
+            <input type="text" placeholder="Type your message..." id="chat-input">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for sending messages
+        function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const messageText = input.value.trim();
+
+            if (messageText) {
+                // Add the user's message to the chat
+                const chatMessages = document.querySelector('.chat-messages');
+                const userMessage = document.createElement('div');
+                userMessage.className = 'message user';
+                userMessage.textContent = messageText;
+
+                chatMessages.appendChild(userMessage);
+
+                // Clear input and scroll to bottom
+                input.value = '';
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+        }
+    </script>
+</body>
+</html>
