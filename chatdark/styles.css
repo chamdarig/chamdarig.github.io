@@ -128,3 +128,21 @@ body {
         padding: 8px 16px;
     }
 }
+/* Code Block Styling */
+pre {
+    background-color: #1e1e2f; /* Dark background */
+    color: #f8f8f2; /* Light text color for code */
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+code {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 14px;
+    color: #ffcc99; /* Accent color for code */
+    display: block;
+}
