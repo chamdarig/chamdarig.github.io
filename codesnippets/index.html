@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JavaScript Code Snippets Reference</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>JavaScript Code Snippets</h1>
+        <p>A collection of practical code snippets for common web development tasks.</p>
+    </header>
+    
+    <main>
+        <section id="snippet1">
+            <h2>1. Toggle Visibility of Elements</h2>
+            <p><strong>Description:</strong> This snippet demonstrates how to toggle the visibility of multiple elements using JavaScript loops.</p>
+            <h3>HTML:</h3>
+            <pre><code>&lt;button id="toggleBtn"&gt;Toggle Items&lt;/button&gt;
+&lt;div class="item"&gt;Item 1&lt;/div&gt;
+&lt;div class="item"&gt;Item 2&lt;/div&gt;
+&lt;div class="item"&gt;Item 3&lt;/div&gt;</code></pre>
+            <h3>JavaScript:</h3>
+            <pre><code>const toggleBtn = document.getElementById('toggleBtn');
+const items = document.querySelectorAll('.item');
+
+toggleBtn.addEventListener('click', () =&gt; {
+    for (const item of items) {
+        item.style.display = (item.style.display === 'none') ? 'block' : 'none';
+    }
+});</code></pre>
+        </section>
+
+        <section id="snippet2">
+            <h2>2. Dynamic List Creation with User Input</h2>
+            <p><strong>Description:</strong> This snippet shows how to dynamically create a list based on user input.</p>
+            <h3>HTML:</h3>
+            <pre><code>&lt;input type="text" id="itemInput" placeholder="Add a new item"&gt;
+&lt;button id="addItemBtn"&gt;Add Item&lt;/button&gt;
+&lt;ul id="itemList"&gt;&lt;/ul&gt;</code></pre>
+            <h3>JavaScript:</h3>
+            <pre><code>const addItemBtn = document.getElementById('addItemBtn');
+const itemInput = document.getElementById('itemInput');
+const itemList = document.getElementById('itemList');
+
+addItemBtn.addEventListener('click', () =&gt; {
+    const itemText = itemInput.value;
+    if (itemText) {
+        const li = document.createElement('li');
+        li.textContent = itemText;
+        itemList.appendChild(li);
+        itemInput.value = ''; // Clear input after adding item
+    }
+});</code></pre>
+        </section>
+
+        <!-- Add more snippets as needed -->
+
+    </main>
+
+    <footer>
+        <p>Created by Your Name</p>
+    </footer>
+</body>
+</html>
