@@ -1,0 +1,59 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: var(--bg-color, #f4f4f4);
+  color: var(--text-color, #333);
+}
+
+.app {
+  display: flex;
+}
+
+.sidebar {
+  width: 200px;
+  background-color: #333;
+  color: #fff;
+  padding: 1rem;
+}
+
+.sidebar nav a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  margin: 0.5rem 0;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 1rem;
+}
+
+.cards {
+  display: flex;
+  gap: 1rem;
+}
+
+.card {
+  background: #fff;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  background: #eee;
+}
+
+/* Dark Mode */
+body.dark-mode {
+  --bg-color: #121212;
+  --text-color: #fff;
+}
+
+body.dark-mode .card {
+  background: #1e1e1e;
+  border-color: #444;
+}
