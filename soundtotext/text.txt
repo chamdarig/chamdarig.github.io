@@ -1,0 +1,4 @@
+this is some text file and I check if this script is working and will show words splitted into words of phrases.
+I think that this is very good idea to check this.
+What do you think about this project.
+
