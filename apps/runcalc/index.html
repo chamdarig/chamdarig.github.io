@@ -1,51 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Runner's Pace Calculator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Runner's Pace Calculator</title>
     <link rel="stylesheet" href="/css/style.css">
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
+        .container { max-width: 400px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
+        input, button { margin: 10px 0; padding: 10px; width: 90%; }
+    </style>
 </head>
 <body>
-  <h2>Runner's Pace Calculator</h2>
-  
-  <label for="distance">Distance (km): </label>
-  <input type="number" id="distance" step="any"><br><br>
-  
-  <label for="hours">Hours: </label>
-  <input type="number" id="hours"><br><br>
-  
-  <label for="minutes">Minutes: </label>
-  <input type="number" id="minutes"><br><br>
-  
-  <button onclick="calculatePace()">Calculate Pace</button>
-  
-  <p id="result"></p>
-  
-  <script>
-    function calculatePace() {
-      // Read the input values
-      var distance = parseFloat(document.getElementById("distance").value);
-      var hours = parseInt(document.getElementById("hours").value, 10);
-      var minutes = parseInt(document.getElementById("minutes").value, 10);
-      
-      // Validate input
-      if (isNaN(distance) || distance <= 0 || isNaN(hours) || isNaN(minutes)) {
-        document.getElementById("result").innerHTML = "Please enter valid numbers.";
-        return;
-      }
-      
-      // Convert time to seconds and compute pace in seconds per kilometer
-      var totalSeconds = hours * 3600 + minutes * 60;
-      var paceSeconds = totalSeconds / distance;
-      
-      // Convert pace seconds to minutes and seconds
-      var paceMinutes = Math.floor(paceSeconds / 60);
-      var paceRemainingSeconds = Math.round(paceSeconds % 60);
-      
-      // Display the result
-      document.getElementById("result").innerHTML = 
-        "Your pace per kilometer is " + paceMinutes + " minute(s) and " + paceRemainingSeconds + " second(s).";
-    }
-  </script>
+
+    <div class="container">
+        <h2>Runner's Pace Calculator</h2>
+
+        <h3>Calculate Pace</h3>
+        <input type="number" id="distancePace" placeholder="Distance (km)">
+        <input type="number" id="hoursPace" placeholder="Hours">
+        <input type="number" id="minutesPace" placeholder="Minutes">
+        <button onclick="calculatePace()">Calculate Pace</button>
+        <p id="paceResult"></p>
+
+        <h3>Calculate Time</h3>
+        <input type="number" id="distanceTime" placeholder="Distance (km)">
+        <input type="number" id="minutesPerKm" placeholder="Pace (min per km)">
+        <input type="number" id="secondsPerKm" placeholder="Pace (sec per km)">
+        <button onclick="calculateTime()">Calculate Time</button>
+        <p id="timeResult"></p>
+    </div>
+
+    <script>
+        function calculatePace() {
+            let distance = parseFloat(document.getElementById("distancePace").value);
+            let hours = parseInt(document.getElementById("hoursPace").value) || 0;
+            let minutes = parseInt(document.getElementById("minutesPace").value) || 0;
+
+            let totalMinutes = (hours * 60) + minutes;
+            if (distance > 0 && totalMinutes > 0) {
+                let pace = totalMinutes / distance;
+                let paceMin = Math.floor(pace);
+                let paceSec = Math.round((pace - paceMin) * 60);
+                document.getElementById("paceResult").innerText = `Pace: ${paceMin} min ${paceSec} sec per km`;
+            } else {
+                document.getElementById("paceResult").innerText = "Please enter valid inputs.";
+            }
+        }
+
+        function calculateTime() {
+            let distance = parseFloat(document.getElementById("distanceTime").value);
+            let paceMin = parseInt(document.getElementById("minutesPerKm").value) || 0;
+            let paceSec = parseInt(document.getElementById("secondsPerKm").value) || 0;
+
+            if (distance > 0 && (paceMin > 0 || paceSec > 0)) {
+                let totalSeconds = (paceMin * 60 + paceSec) * distance;
+                let hours = Math.floor(totalSeconds / 3600);
+                let minutes = Math.floor((totalSeconds % 3600) / 60);
+                document.getElementById("timeResult").innerText = `Total Time: ${hours} hr ${minutes} min`;
+            } else {
+                document.getElementById("timeResult").innerText = "Please enter valid inputs.";
+            }
+        }
+    </script>
+
 </body>
 </html>
