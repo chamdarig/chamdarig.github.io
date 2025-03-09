@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Runner's Pace Calculator</title>
+</head>
+<body>
+  <h2>Runner's Pace Calculator</h2>
+  
+  <label for="distance">Distance (km): </label>
+  <input type="number" id="distance" step="any"><br><br>
+  
+  <label for="hours">Hours: </label>
+  <input type="number" id="hours"><br><br>
+  
+  <label for="minutes">Minutes: </label>
+  <input type="number" id="minutes"><br><br>
+  
+  <button onclick="calculatePace()">Calculate Pace</button>
+  
+  <p id="result"></p>
+  
+  <script>
+    function calculatePace() {
+      // Read the input values
+      var distance = parseFloat(document.getElementById("distance").value);
+      var hours = parseInt(document.getElementById("hours").value, 10);
+      var minutes = parseInt(document.getElementById("minutes").value, 10);
+      
+      // Validate input
+      if (isNaN(distance) || distance <= 0 || isNaN(hours) || isNaN(minutes)) {
+        document.getElementById("result").innerHTML = "Please enter valid numbers.";
+        return;
+      }
+      
+      // Convert time to seconds and compute pace in seconds per kilometer
+      var totalSeconds = hours * 3600 + minutes * 60;
+      var paceSeconds = totalSeconds / distance;
+      
+      // Convert pace seconds to minutes and seconds
+      var paceMinutes = Math.floor(paceSeconds / 60);
+      var paceRemainingSeconds = Math.round(paceSeconds % 60);
+      
+      // Display the result
+      document.getElementById("result").innerHTML = 
+        "Your pace per kilometer is " + paceMinutes + " minute(s) and " + paceRemainingSeconds + " second(s).";
+    }
+  </script>
+</body>
+</html>
