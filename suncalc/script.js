@@ -1,10 +1,32 @@
-// Event dla widoku całorocznego
+// Obliczanie wschodów i zachodów słońca na podstawie wybranej daty i lokalizacji
+document.getElementById('calculateBtn').addEventListener('click', function () {
+    const date = new Date(document.getElementById('date').value);
+    const citySelect = document.getElementById('city');
+    const lat = citySelect.options[citySelect.selectedIndex].dataset.lat;
+    const lon = citySelect.options[citySelect.selectedIndex].dataset.lon;
+
+    if (!isNaN(date.getTime())) {
+        const { sunrise, sunset } = SunCalc.getTimes(date, lat, lon);
+        const sunriseStr = formatTime(sunrise);
+        const sunsetStr = formatTime(sunset);
+        document.getElementById('result').innerText = `Wschód słońca: ${sunriseStr}, Zachód słońca: ${sunsetStr}`;
+    } else {
+        document.getElementById('result').innerText = 'Wybierz prawidłową datę.';
+    }
+});
+
+function formatTime(date) {
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    return `${hours}:${minutes}`;
+}
+
+// Rysowanie wykresu dla całego roku
 document.getElementById('plotBtn').addEventListener('click', function () {
     const citySelect = document.getElementById('city');
     const lat = citySelect.options[citySelect.selectedIndex].dataset.lat;
     const lon = citySelect.options[citySelect.selectedIndex].dataset.lon;
 
-    // Daty i długości dnia
     const startDate = new Date("2025-01-01");
     const sunriseTimes = [];
     const sunsetTimes = [];
@@ -13,8 +35,8 @@ document.getElementById('plotBtn').addEventListener('click', function () {
     for (let i = 0; i < 365; i++) {
         const date = new Date(startDate);
         date.setDate(date.getDate() + i);
-        const { sunrise, sunset } = calculateSunTimes(date, lat, lon);
-        sunriseTimes.push(convertTimeToDecimal(sunrise)); // Konwertujemy na godziny (np. 6.30)
+        const { sunrise, sunset } = SunCalc.getTimes(date, lat, lon);
+        sunriseTimes.push(convertTimeToDecimal(sunrise));
         sunsetTimes.push(convertTimeToDecimal(sunset));
         labels.push(date.toISOString().slice(5, 10)); // Format "MM-DD"
     }
@@ -22,13 +44,12 @@ document.getElementById('plotBtn').addEventListener('click', function () {
     drawAnnualChart(labels, sunriseTimes, sunsetTimes);
 });
 
-// Funkcja pomocnicza: Konwersja godziny do zapisu dziesiętnego (np. "06:30" -> 6.5)
 function convertTimeToDecimal(time) {
-    const [hours, minutes] = time.split(':').map(Number);
+    const hours = time.getHours();
+    const minutes = time.getMinutes();
     return hours + minutes / 60;
 }
 
-// Rysowanie wykresu dla całego roku
 function drawAnnualChart(labels, sunriseTimes, sunsetTimes) {
     const ctx = document.getElementById('dayLengthChart').getContext('2d');
     new Chart(ctx, {
@@ -59,7 +80,7 @@ function drawAnnualChart(labels, sunriseTimes, sunsetTimes) {
                         text: 'Godzina'
                     },
                     ticks: {
-                        callback: function(value) {
+                        callback: function (value) {
                             const hours = Math.floor(value);
                             const minutes = Math.round((value - hours) * 60);
                             return `${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
@@ -68,7 +89,7 @@ function drawAnnualChart(labels, sunriseTimes, sunsetTimes) {
                 },
                 x: {
                     ticks: {
-                        maxTicksLimit: 12 // Zmniejszamy ilość etykiet na osi X
+                        maxTicksLimit: 12
                     }
                 }
             }
