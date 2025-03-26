@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Wschodów i Zachodów Słońca</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/suncalc"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Kalkulator Wschodów i Zachodów Słońca</h1>
+
+        <label for="date">Podaj datę:</label>
+        <input type="date" id="date" />
+
+        <label for="city">Wybierz miasto:</label>
+        <select id="city">
+            <option value="Kraków" data-lat="50.0647" data-lon="19.945">Kraków</option>
+            <option value="Warszawa" data-lat="52.2297" data-lon="21.0122">Warszawa</option>
+            <option value="Gdańsk" data-lat="54.352" data-lon="18.6466">Gdańsk</option>
+        </select>
+
+        <button id="calculateBtn">Oblicz wschód i zachód słońca</button>
+        <p id="result"></p>
+
+        <h2>Widok Roczny: Wschody i Zachody Słońca</h2>
+        <p>Po kliknięciu poniższego przycisku zobaczysz, jak zmieniają się godziny wschodu i zachodu słońca w wybranym mieście przez cały rok.</p>
+        <button id="plotBtn">Pokaż wykres dla całego roku</button>
+
+        <canvas id="dayLengthChart" width="400" height="200"></canvas>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
