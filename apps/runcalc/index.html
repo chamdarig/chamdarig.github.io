@@ -3,20 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Runner's Pace Calculator</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <title>Runner's Pace & Time Calculator | Your Running Companion</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
-        .container { max-width: 400px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
-        input, button { margin: 10px 0; padding: 10px; width: 90%; }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        input, button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 90%;
+        }
+
+        .ad-slot {
+            margin: 20px 0;
+            border: 1px dashed #ccc;
+            padding: 20px;
+            min-height: 100px;
+        }
+
+        .running-tip {
+            background-color: #f0f8ff;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+            text-align: left;
+        }
+
+        .distance-buttons button {
+            margin: 5px;
+            padding: 8px 12px;
+        }
     </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_AD_CLIENT_ID"
+     crossorigin="anonymous"></script>
 </head>
 <body>
-
     <div class="container">
-        <h2>Runner's Pace Calculator</h2>
+        <h1>Runner's Pace & Time Calculator</h1>
+        <p>Your go-to tool for calculating running pace and time. Enhance your training and achieve your goals!</p>
+
+        <div class="ad-slot">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-YOUR_AD_CLIENT_ID"
+                 data-ad-slot="YOUR_AD_SLOT_1"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
 
         <h3>Calculate Pace</h3>
+
+        <div class="distance-buttons">
+            <button onclick="setDistance('42.195')">Marathon (42.195 km)</button>
+            <button onclick="setDistance('21')">Half Marathon (21 km)</button>
+            <button onclick="setDistance('10')">10 km</button>
+            <button onclick="setDistance('5')">5 km</button>
+        </div>
+
         <input type="number" id="distancePace" placeholder="Distance (km)">
         <input type="number" id="hoursPace" placeholder="Hours">
         <input type="number" id="minutesPace" placeholder="Minutes">
@@ -24,14 +81,53 @@
         <p id="paceResult"></p>
 
         <h3>Calculate Time</h3>
+
+        <div class="distance-buttons">
+            <button onclick="setTimeDistance('42.195')">Marathon (42.195 km)</button>
+            <button onclick="setTimeDistance('21')">Half Marathon (21 km)</button>
+            <button onclick="setTimeDistance('10')">10 km</button>
+            <button onclick="setTimeDistance('5')">5 km</button>
+        </div>
+
         <input type="number" id="distanceTime" placeholder="Distance (km)">
         <input type="number" id="minutesPerKm" placeholder="Pace (min per km)">
         <input type="number" id="secondsPerKm" placeholder="Pace (sec per km)">
         <button onclick="calculateTime()">Calculate Time</button>
         <p id="timeResult"></p>
+
+        <div class="ad-slot">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-YOUR_AD_CLIENT_ID"
+                 data-ad-slot="YOUR_AD_SLOT_2"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <div class="running-tip">
+            <h4>Running Tip:</h4>
+            <p>Remember to warm up before your run and cool down afterward to prevent injuries. Proper hydration is also crucial for optimal performance.</p>
+        </div>
+
+        <div class="running-tip">
+            <h4>Training Tip:</h4>
+            <p>Vary your training with interval runs, tempo runs, and long slow distance runs for well-rounded fitness.</p>
+        </div>
+
     </div>
 
     <script>
+        function setDistance(distance) {
+            document.getElementById("distancePace").value = distance;
+        }
+
+        function setTimeDistance(distance) {
+          document.getElementById("distanceTime").value = distance;
+        }
+
         function calculatePace() {
             let distance = parseFloat(document.getElementById("distancePace").value);
             let hours = parseInt(document.getElementById("hoursPace").value) || 0;
@@ -63,6 +159,5 @@
             }
         }
     </script>
-
 </body>
 </html>
